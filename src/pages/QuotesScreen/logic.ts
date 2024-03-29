@@ -81,6 +81,10 @@ const useLogic = () => {
     const [loading, setLoading] = useState(true);
     const [cardsData, setCardsData] = useState<Card[]>([]);
 
+    const closeCard = (supplier_id: string) => {
+        setCardsData(cardsData.filter(card => card.supplier_id !== supplier_id));
+    }
+
     useEffect(() => {
         const processData = () => {
             const itemsBySupplier = QUOTE_ITEMS.reduce((acc: Record<string, QuoteItem[]>, item) => {
@@ -92,6 +96,7 @@ const useLogic = () => {
 
             const cards: Card[] = SUPPLIERS.map(supplier => ({
                 ...supplier,
+                supplier_id: supplier.supplier_id,
                 quoteItems: itemsBySupplier[supplier.supplier_id] || [],
                 colorScheme: colorScheme[SUPPLIERS.findIndex(s => s.supplier_id === supplier.supplier_id)]
             }));
@@ -107,6 +112,7 @@ const useLogic = () => {
     return {
         loading,
         cardsData,
+        closeCard
     };
 };
 

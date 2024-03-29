@@ -24,6 +24,7 @@ export interface QuoteItem {
 }
 
 export interface Card {
+    supplier_id: string;
     name: string;
     score: number;
     quoteItems: QuoteItem[];
