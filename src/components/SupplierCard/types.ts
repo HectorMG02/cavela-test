@@ -12,12 +12,15 @@ export type SupplierCardProps = {
     rating: number;
     variants: Variant[];
     badges?: string[];
-    colorScheme?: CardsColorScheme;
+    colorScheme: CardsColorScheme;
+    scoreColorScheme: CardsColorScheme;
     closeCard: () => void;
   };
 
 export type CardsColorScheme = {
     backgroundColor: string;
     borderColor: string;
+    textColor?: string
+    minScore: number;
 }
   

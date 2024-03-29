@@ -1,18 +1,22 @@
 import { CardsColorScheme } from "./types";
 
-const useLogic = ( { colorScheme } : { colorScheme : CardsColorScheme | undefined}) => {
-    const defaultColorScheme = {
-        backgroundColor: '#FFFFFF',
-        borderColor: '#D1D5DB'
-      };
+const useLogic = ( { colorScheme, scoreColorScheme } : { colorScheme : CardsColorScheme | undefined, 
+    scoreColorScheme : CardsColorScheme | undefined
+    }) => { 
     
-    
-      const backgroundColor = colorScheme?.backgroundColor || defaultColorScheme.backgroundColor;
-      const borderColor = colorScheme?.borderColor || defaultColorScheme.borderColor;
+      const backgroundColor = colorScheme?.backgroundColor;
+      const borderColor = colorScheme?.borderColor;
+
+      const scoreBackgroundColor = scoreColorScheme?.backgroundColor;
+    const scoreBorderColor = scoreColorScheme?.borderColor;
+    const scoreTextColor = scoreColorScheme?.textColor;
     
     return {
         backgroundColor,
-        borderColor
+        borderColor,
+        scoreBackgroundColor,
+        scoreBorderColor,
+        scoreTextColor
     }
 }
 

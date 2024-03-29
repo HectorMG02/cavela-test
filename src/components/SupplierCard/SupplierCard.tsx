@@ -1,5 +1,5 @@
 import React from 'react';
-import QuotesTable from '../QuotesTable/QuotesTable';
+import QuotesTable from '../Tables/QuotesTable/QuotesTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
 
@@ -7,10 +7,13 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
     name,
     rating,
     colorScheme,
+    scoreColorScheme,
     variants,
     closeCard,
 }) => {
-    const { backgroundColor, borderColor } = useLogic({ colorScheme });
+    const { backgroundColor, borderColor, scoreBackgroundColor, scoreBorderColor, scoreTextColor } = useLogic({ colorScheme, scoreColorScheme });
+
+    console.log(scoreColorScheme)
 
     return (
         <div
@@ -26,9 +29,12 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
                     <h3 className="font-bold text-3xl">{name}</h3>
                 </div>
                 <div
-                    className="size-10 flex items-center justify-center bg-green-200 text-green-700 border-2 
-            border-green-700 p-2 m-5 rounded-md
-        "
+                    className="size-10 flex items-center justify-centerborder-2 p-2 m-5 rounded-md border"
+                    style={{
+                        backgroundColor: scoreBackgroundColor,
+                        borderColor: scoreBorderColor,
+                        color: scoreTextColor,
+                    }}
                 >
                     {rating}
                 </div>

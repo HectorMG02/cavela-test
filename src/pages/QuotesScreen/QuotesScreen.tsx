@@ -31,6 +31,7 @@ const QuotesScreen = () => {
                         total: parseFloat(item['unit cost'].slice(1)) * (item.quantity).toFixed(2),
                     }))}
                     colorScheme={card.colorScheme}
+                    scoreColorScheme={card.scoreColorScheme}
                     closeCard={() => closeCard(card.supplier_id)}
                 />
             ))}

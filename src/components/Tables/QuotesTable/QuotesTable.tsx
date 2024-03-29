@@ -1,5 +1,5 @@
 // QuotesTable.tsx
-import { Variant } from '../SupplierCard/types';
+import { Variant } from '../../SupplierCard/types';
 import useLogic from './logic';
 
 const QuotesTable = ({variants}: { variants: Variant[]}) => {

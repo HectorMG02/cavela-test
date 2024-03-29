@@ -29,4 +29,5 @@ export interface Card {
     score: number;
     quoteItems: QuoteItem[];
     colorScheme: CardsColorScheme;
+    scoreColorScheme: CardsColorScheme;
 }
