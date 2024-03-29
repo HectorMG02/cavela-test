@@ -1,3 +1,5 @@
+import { CardsColorScheme } from "../../components/SupplierCard/types";
+
 export interface Supplier {
     supplier_id: string;
     name: string;
@@ -19,4 +21,11 @@ export interface QuoteItem {
     "lead time": string;
     "sample cost": string;
     badges: [string, boolean | null][];
+}
+
+export interface Card {
+    name: string;
+    score: number;
+    quoteItems: QuoteItem[];
+    colorScheme: CardsColorScheme;
 }
