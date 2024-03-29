@@ -3,6 +3,7 @@ import SupplierCard from '../../components/SupplierCard/SupplierCard';
 import SupplierCardSkeleton from '../../components/Skeletons/SupplierCardSkeleton/SupplierCardSkeleton';
 import useLogic from './logic';
 import PlaceholderCard from '../../components/PlaceholderCard/PlaceholderCard';
+import PlaceholderCardSkeleton from '../../components/Skeletons/PlaceholderCardSkeleton/PlaceholderCardSkeleton';
 
 const QuotesScreen = () => {
     const { loading, cardsData, closeCard } = useLogic();
@@ -12,7 +13,7 @@ const QuotesScreen = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 full-width">
             <SupplierCardSkeleton />
             <SupplierCardSkeleton />
-            <SupplierCardSkeleton />
+            <PlaceholderCardSkeleton />
         </div>
     )
 
@@ -40,7 +41,10 @@ const QuotesScreen = () => {
 
     return (
         <>
-            <h1 className="text-4xl ml-4 mb-6">Cards</h1>
+            <div className='ml-6'>
+                <h1 className="text-4xl mb-6">Quotes Selection</h1>
+                <div className="h-1 bg-gray-300 mb-6 w-full" />
+            </div>
             {loading ? renderSkeletons() : renderCards()}
         </>
     );
