@@ -8,13 +8,14 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
     rating,
     colorScheme,
     variants,
-    closeCard
+    closeCard,
 }) => {
     const { backgroundColor, borderColor } = useLogic({ colorScheme });
 
     return (
         <div
-            className="w-full rounded shadow-lg m-8 p-4 relative border-4"
+            className="w-full rounded shadow-lg m-8 p-4 relative border-4 hover:border-gray-400 transition-all duration-300 ease-in-out cursor-pointer hover:shadow-xl hover:scale-105
+            "
             style={{
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
@@ -34,7 +35,8 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
             </div>
 
             <button
-                className={`absolute top-2 right-2 transform translate-x-6 -translate-y-1/2 text-black hover:text-gray-700 border-[3px] border-[${colorScheme?.borderColor}] rounded-full p-1 bg-white`}
+                className={`absolute top-2 right-2 transform translate-x-6 -translate-y-1/2 text-black hover:text-gray-700 border-[3px] border-[${colorScheme?.borderColor}] rounded-full p-1 bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out
+                hover:scale-110`}
                 onClick={closeCard}
             >
                 <svg
@@ -53,7 +55,8 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
             </button>
 
             <button
-                className={`absolute top-2 right-2 transform translate-x-6 translate-y-6 text-black hover:text-gray-700 border-[3px] border-[${colorScheme?.borderColor}] rounded-full p-1 bg-white`}
+                className={`absolute top-2 right-2 transform translate-x-6 translate-y-6 text-black hover:text-gray-700 border-[3px] border-[${colorScheme?.borderColor}] rounded-full p-1 bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-110
+                `}
                 onClick={closeCard}
             >
                 <svg
