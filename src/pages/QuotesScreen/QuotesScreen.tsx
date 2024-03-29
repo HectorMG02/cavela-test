@@ -2,6 +2,7 @@
 import SupplierCard from '../../components/SupplierCard/SupplierCard';
 import SupplierCardSkeleton from '../../components/Skeletons/SupplierCardSkeleton/SupplierCardSkeleton';
 import useLogic from './logic';
+import PlaceholderCard from '../../components/PlaceholderCard/PlaceholderCard';
 
 const QuotesScreen = () => {
     const { loading, cardsData, closeCard } = useLogic();
@@ -16,7 +17,7 @@ const QuotesScreen = () => {
     )
 
     const renderCards = () => (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 full-width">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 full-width">
             {cardsData.map((card: any, index: number) => (
                 <SupplierCard
                     key={index}
@@ -32,6 +33,8 @@ const QuotesScreen = () => {
                     closeCard={() => closeCard(card.supplier_id)}
                 />
             ))}
+
+            <PlaceholderCard />
         </div>
     );
 

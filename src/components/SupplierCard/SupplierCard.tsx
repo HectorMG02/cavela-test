@@ -14,7 +14,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
     return (
         <div
-            className="w-full rounded shadow-lg m-4 p-4 relative border-4"
+            className="w-full rounded shadow-lg m-8 p-4 relative border-4"
             style={{
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
