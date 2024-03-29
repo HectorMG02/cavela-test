@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Quote, QuoteItem, Supplier } from "./types";
+import { CardsColorScheme } from "../../components/SupplierCard/types";
 
 const SUPPLIERS: Supplier[] = [
     {
@@ -63,30 +65,63 @@ const QUOTE_ITEMS: QuoteItem[] = [
 ]
 
 
-
+const colorScheme: CardsColorScheme[] = [
+    {
+        backgroundColor: '#B7CBC7',
+        borderColor: '#798E8B',
+    },
+    {
+        backgroundColor: '#E5DABD',
+        borderColor: '#E6DBBF',
+    }
+]
 
 
 const useLogic = () => {
     const [loading, setLoading] = useState(true);
-    const [quotes, setQuotes] = useState<Quote[]>([]);
-    const [suppliers, setSuppliers] = useState<Supplier[]>([]);
-    const [quoteItems, setQuoteItems] = useState<QuoteItem[]>([]);
+    const [cardsData, setCardsData] = useState<any>([]);
 
     useEffect(() => {
-        setTimeout(() => {
-            setQuotes(QUOTES);
-            setSuppliers(SUPPLIERS);
-            setQuoteItems(QUOTE_ITEMS);
+        const processData = () => {
+            // Agrupar quoteItems por supplier_id
+            const itemsBySupplier = QUOTE_ITEMS.reduce((acc: any, item) => {
+                if (!acc[item.supplier_id]) acc[item.supplier_id] = [];
+                acc[item.supplier_id].push(item);
+                return acc;
+            }, {});
+
+            // Unir suppliers con sus respectivos quoteItems
+            const cards = SUPPLIERS.map(supplier => ({
+                ...supplier,
+                quoteItems: itemsBySupplier[supplier.supplier_id] || [],
+                badges: [], // Inicializar badges vacíos, se llenarán en el próximo paso
+                colorScheme: colorScheme[SUPPLIERS.findIndex(s => s.supplier_id === supplier.supplier_id)]
+            }));
+
+            // Añadir información de quotes a cada tarjeta
+            QUOTES.forEach((quote: any) => {
+                quote.quote_items.forEach((itemId: number) => {
+                    const item = QUOTE_ITEMS.find((item: any) => item.quote_item_id === itemId);
+                    if (item) {
+                        const card = cards.find(card => card.supplier_id === item.supplier_id);
+                        if (card) {
+                            card.badges = card.badges.concat(quote.badges);
+                        }
+                    }
+                });
+            });
+
+            setCardsData(cards);
             setLoading(false);
-        }, 3000);
+        };
+
+        setTimeout(processData, 3000);
     }, []);
 
     return {
         loading,
-        quotes,
-        suppliers,
-        quoteItems,
-    }
-}
+        cardsData,
+    };
+};
 
 export default useLogic;

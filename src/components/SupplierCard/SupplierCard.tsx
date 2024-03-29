@@ -3,9 +3,11 @@ import QuotesTable from '../QuotesTable/QuotesTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
 
-const SupplierCard: React.FC<SupplierCardProps> = ({ name, rating, colorScheme }) => {
+const SupplierCard: React.FC<SupplierCardProps> = ({ name, rating, colorScheme, ...rest }) => {
   const { backgroundColor, borderColor } = useLogic({ colorScheme });
  
+  console.log(rest)
+
   return (
     <div className="max-w-sm rounded shadow-lg m-4 p-4 relative border-4"
       style={{ backgroundColor: backgroundColor, borderColor: borderColor }}>
@@ -25,11 +27,8 @@ const SupplierCard: React.FC<SupplierCardProps> = ({ name, rating, colorScheme }
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-
-    
-
-      <QuotesTable />
       
+      <QuotesTable/>
     </div>
   );
 };

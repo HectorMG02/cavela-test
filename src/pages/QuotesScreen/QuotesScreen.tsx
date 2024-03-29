@@ -1,47 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SupplierCard from '../../components/SupplierCard/SupplierCard';
 import SupplierCardSkeleton from '../../components/SupplierCardSkeleton/SupplierCardSkeleton';
 import useLogic from './logic';
 
 const QuotesScreen = () => {
-    const { loading } = useLogic()
+    const { loading, cardsData } = useLogic();
 
+    const renderSkeletons = () => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border full-width">
+            <SupplierCardSkeleton />
+            <SupplierCardSkeleton />
+            <SupplierCardSkeleton />
+        </div>
+    )
 
+    const renderCards = () => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border full-width">
+            {cardsData.map((card: any, index: number) => (
+                <SupplierCard
+                    key={index}
+                    name={card.name}
+                    rating={card.score}
+                    variants={card.quoteItems.map((item: any) => ({
+                        name: item.variant,
+                        quantity: item.quantity,
+                        unitCost: item['unit cost'],
+                        total: `$${(parseFloat(item['unit cost'].slice(1)) * item.quantity).toFixed(2)}`,
+                    }))}
+                    colorScheme={card.colorScheme}
+                />
+            ))}
+        </div>
+    );
 
     return (
         <>
-            <h1 className="text-4xl ml-4">Cards</h1>
-
-
-            {
-                loading ? (
-                    <SupplierCardSkeleton />
-                ) : (
-                    <SupplierCard
-                    name="Supplier 1"
-                    rating={4.5}
-                    badges={['Badge 1', 'Badge 2']}
-                    variants={[
-                        {
-                            name: 'Variant 1',
-                            quantity: 10,
-                            unitCost: '$10',
-                            total: '$100',
-                        },
-                        {
-                            name: 'Variant 2',
-                            quantity: 20,
-                            unitCost: '$20',
-                            total: '$400',
-                        },
-                    ]}
-                    colorScheme={{
-                        backgroundColor: '#B7CBC7',
-                        borderColor: '#798E8B',
-                    }}
-                />
-                )
-            }
-
+            <h1 className="text-4xl ml-4 mb-6">Cards</h1>
+            {loading ? renderSkeletons() : renderCards()}
         </>
     );
 };
