@@ -1,10 +1,9 @@
 // QuotesTable.tsx
 import { Variant } from '../SupplierCard/types';
+import useLogic from './logic';
 
 const QuotesTable = ({variants}: { variants: Variant[]}) => {
-
-  console.log(variants)
-  const grandTotal = variants.reduce((acc, item) => acc + Number(item.total), 0);
+  const { animatedTotal } = useLogic({ variants })
 
   return (
     <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -35,10 +34,10 @@ const QuotesTable = ({variants}: { variants: Variant[]}) => {
                 {item.quantity}
               </td>
               <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
-                {`$${item.unitCost}`}
+                {`$${Number(item.unitCost).toFixed(2)}`}
               </td>
               <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
-                {`$${item.total}`}
+                {`$${Number(item.total).toFixed(2)}`}
               </td>
             </tr>
           ))}
@@ -47,7 +46,7 @@ const QuotesTable = ({variants}: { variants: Variant[]}) => {
               Total
             </td>
             <td className="px-3 py-4 text-sm font-semibold text-gray-900">
-              {`$${grandTotal}`}
+              {`$${animatedTotal.toFixed(2)}`}
             </td>
           </tr>
         </tbody>

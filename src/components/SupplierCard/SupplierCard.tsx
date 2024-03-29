@@ -11,8 +11,6 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 }) => {
     const { backgroundColor, borderColor } = useLogic({ colorScheme });
 
-    console.log(variants);
-
     return (
         <div
             className="w-full rounded shadow-lg m-4 p-4 relative border-4"

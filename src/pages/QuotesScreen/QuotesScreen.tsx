@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import SupplierCard from '../../components/SupplierCard/SupplierCard';
-import SupplierCardSkeleton from '../../components/SupplierCardSkeleton/SupplierCardSkeleton';
+import SupplierCardSkeleton from '../../components/Skeletons/SupplierCardSkeleton/SupplierCardSkeleton';
 import useLogic from './logic';
 
 const QuotesScreen = () => {

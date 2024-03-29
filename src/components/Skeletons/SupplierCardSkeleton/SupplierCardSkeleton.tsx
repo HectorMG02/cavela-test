@@ -9,7 +9,8 @@ const SupplierCardSkeleton = () => (
       <div className="h-10 w-10 bg-gray-300 mr-5"></div>
     </div>
 
-    <div className="absolute top-2 right-2 transform translate-x-1/2 -translate-y-1/2 size-10 rounded-full bg-gray-300" />
+    <div className="absolute top-2 right-2 transform translate-x-6 -translate-y-1/2 size-10 rounded-full bg-gray-300" />
+    <div className="absolute top-2 right-2 transform translate-x-6 translate-y-6 size-10 rounded-full bg-gray-300" />
 
     <div className="space-y-2">
         <QuotesTableSkeleton />
