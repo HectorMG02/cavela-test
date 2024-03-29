@@ -13,6 +13,7 @@ export type SupplierCardProps = {
     variants: Variant[];
     badges?: string[];
     colorScheme?: CardsColorScheme;
+    closeCard: () => void;
   };
 
 export type CardsColorScheme = {

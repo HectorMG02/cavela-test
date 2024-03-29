@@ -4,7 +4,8 @@ import SupplierCardSkeleton from '../../components/Skeletons/SupplierCardSkeleto
 import useLogic from './logic';
 
 const QuotesScreen = () => {
-    const { loading, cardsData } = useLogic();
+    const { loading, cardsData, closeCard } = useLogic();
+
 
     const renderSkeletons = () => (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 full-width">
@@ -28,6 +29,7 @@ const QuotesScreen = () => {
                         total: parseFloat(item['unit cost'].slice(1)) * (item.quantity).toFixed(2),
                     }))}
                     colorScheme={card.colorScheme}
+                    closeCard={() => closeCard(card.supplier_id)}
                 />
             ))}
         </div>

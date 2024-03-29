@@ -8,6 +8,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
     rating,
     colorScheme,
     variants,
+    closeCard
 }) => {
     const { backgroundColor, borderColor } = useLogic({ colorScheme });
 
@@ -34,6 +35,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
             <button
                 className={`absolute top-2 right-2 transform translate-x-6 -translate-y-1/2 text-black hover:text-gray-700 border-[3px] border-[${colorScheme?.borderColor}] rounded-full p-1 bg-white`}
+                onClick={closeCard}
             >
                 <svg
                     className="size-6"
@@ -52,6 +54,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
             <button
                 className={`absolute top-2 right-2 transform translate-x-6 translate-y-6 text-black hover:text-gray-700 border-[3px] border-[${colorScheme?.borderColor}] rounded-full p-1 bg-white`}
+                onClick={closeCard}
             >
                 <svg
                     className="size-6"
