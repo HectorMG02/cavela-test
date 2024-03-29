@@ -1,5 +1,5 @@
 import './App.css';
-import SupplierCard from './components/SupplierCard';
+import SupplierCard from './components/SupplierCard/SupplierCard';
 
 function App() {
     return (
@@ -13,6 +13,7 @@ function App() {
                         { name: 'Variant 1', quantity: 10, unitCost: '$10', total: '$100' },
                         { name: 'Variant 2', quantity: 20, unitCost: '$20', total: '$400' },
                     ]}
+                    colorScheme={{ backgroundColor: '#B7CBC7', borderColor: '#798E8B' }}
                 />
         </>
     );
