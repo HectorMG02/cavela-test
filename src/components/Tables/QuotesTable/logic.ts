@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Variant } from '../SupplierCard/types';
+import { Variant } from '../../Cards/SupplierCard/types';
 
 const useLogic = ({ variants }: { variants: Variant[] }) => {
     const grandTotal = variants.reduce(

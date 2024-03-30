@@ -1,20 +1,30 @@
 import React from 'react';
-import QuotesTable from '../QuotesTable/QuotesTable';
+import QuotesTable from '../../Tables/QuotesTable/QuotesTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
+import RatingBox from '../../RatingBox/RatingBox';
 
 const SupplierCard: React.FC<SupplierCardProps> = ({
     name,
     rating,
     colorScheme,
+    ratingColorScheme,
     variants,
     closeCard,
 }) => {
-    const { backgroundColor, borderColor } = useLogic({ colorScheme });
+    const {
+        backgroundColor,
+        borderColor,
+        scoreBackgroundColor,
+        scoreBorderColor,
+        scoreTextColor,
+    } = useLogic({ colorScheme, ratingColorScheme });
+
+    console.log(ratingColorScheme);
 
     return (
         <div
-            className="w-full rounded shadow-lg m-8 p-4 relative border-4 hover:border-gray-400 transition-all duration-300 ease-in-out cursor-pointer hover:shadow-xl hover:scale-105
+            className="w-full rounded shadow-lg p-4 md:m-8 relative border-4 hover:border-gray-400 transition-all duration-300 ease-in-out cursor-pointer hover:shadow-xl hover:scale-105
             "
             style={{
                 backgroundColor: backgroundColor,
@@ -25,13 +35,13 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
                 <div className="p-3">
                     <h3 className="font-bold text-3xl">{name}</h3>
                 </div>
-                <div
-                    className="size-10 flex items-center justify-center bg-green-200 text-green-700 border-2 
-            border-green-700 p-2 m-5 rounded-md
-        "
-                >
-                    {rating}
-                </div>
+
+                <RatingBox
+                    backgroundColor={scoreBackgroundColor}
+                    borderColor={scoreBorderColor}
+                    textColor={scoreTextColor}
+                    rating={rating}
+                />
             </div>
 
             <button

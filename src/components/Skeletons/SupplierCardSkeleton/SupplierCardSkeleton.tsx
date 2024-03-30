@@ -1,7 +1,9 @@
 import QuotesTableSkeleton from "../QuotesTableSkeleton/QuotesTableSkeleton";
 
 const SupplierCardSkeleton = () => (
-  <div className="animate-pulse max-w-sm rounded shadow-lg m-4 p-4 relative border-4 bg-gray-200 border-gray-300">
+  <div className="animate-pulse w-full rounded shadow-lg m-8 p-4 relative border-4 bg-gray-200 border-gray-300
+    min-h-[300px] min-w
+  ">
     <div className="flex justify-between items-center mb-4">
       <div className='p-3 flex-1'>
         <div className="h-8 bg-gray-300 rounded w-3/4"></div>
