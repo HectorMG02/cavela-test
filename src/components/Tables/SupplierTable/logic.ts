@@ -120,6 +120,11 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
     };
     
     const createNewQuote = () => {
+        if(selectedQuotes.length === 0){
+            onClose();
+            return;
+        }
+
         const groupedQuotes = groupBySupplierId(selectedQuotes);
         const formattedQuotes = formatQuotesForDispatch(groupedQuotes);
         dispatch(createQuote(formattedQuotes[0]));
