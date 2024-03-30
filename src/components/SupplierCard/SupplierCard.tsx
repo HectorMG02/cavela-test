@@ -2,6 +2,7 @@ import React from 'react';
 import QuotesTable from '../Tables/QuotesTable/QuotesTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
+import RatingBox from '../RatingBox/RatingBox';
 
 const SupplierCard: React.FC<SupplierCardProps> = ({
     name,
@@ -11,9 +12,15 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
     variants,
     closeCard,
 }) => {
-    const { backgroundColor, borderColor, scoreBackgroundColor, scoreBorderColor, scoreTextColor } = useLogic({ colorScheme, scoreColorScheme });
+    const {
+        backgroundColor,
+        borderColor,
+        scoreBackgroundColor,
+        scoreBorderColor,
+        scoreTextColor,
+    } = useLogic({ colorScheme, scoreColorScheme });
 
-    console.log(scoreColorScheme)
+    console.log(scoreColorScheme);
 
     return (
         <div
@@ -28,16 +35,13 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
                 <div className="p-3">
                     <h3 className="font-bold text-3xl">{name}</h3>
                 </div>
-                <div
-                    className="size-10 flex items-center justify-centerborder-2 p-2 m-5 rounded-md border"
-                    style={{
-                        backgroundColor: scoreBackgroundColor,
-                        borderColor: scoreBorderColor,
-                        color: scoreTextColor,
-                    }}
-                >
-                    {rating}
-                </div>
+
+                <RatingBox
+                    backgroundColor={scoreBackgroundColor}
+                    borderColor={scoreBorderColor}
+                    textColor={scoreTextColor}
+                    rating={rating}
+                />
             </div>
 
             <button

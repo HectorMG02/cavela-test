@@ -1,3 +1,5 @@
+import { ratingColorSchemes } from "../../../utils/colors";
+import RatingBox from "../../RatingBox/RatingBox";
 
 const SupplierTable = () => {
   const supplierData = [
@@ -10,6 +12,12 @@ const SupplierTable = () => {
   return (
     <div className="flex flex-row items-center">
     <h2 className="text-xl font-bold text-gray-700 mr-4">Supplier 1</h2>
+    <RatingBox
+                backgroundColor={ratingColorSchemes[2].backgroundColor}
+                borderColor={ratingColorSchemes[2].borderColor}
+                textColor={ratingColorSchemes[2].textColor}
+                rating={"5.0"}
+            />
     <div className="flex-grow overflow-x-auto">
     <table className="w-[90%] divide-y divide-gray-500 text-left">
         <thead className="bg-gray-50">

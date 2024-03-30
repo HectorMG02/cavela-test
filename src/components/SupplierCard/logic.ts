@@ -1,7 +1,7 @@
 import { CardsColorScheme } from "./types";
 
 const useLogic = ( { colorScheme, scoreColorScheme } : { colorScheme : CardsColorScheme | undefined, 
-    scoreColorScheme : CardsColorScheme | undefined
+    scoreColorScheme : CardsColorScheme
     }) => { 
     
       const backgroundColor = colorScheme?.backgroundColor;

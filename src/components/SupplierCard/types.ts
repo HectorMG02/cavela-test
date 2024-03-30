@@ -20,7 +20,13 @@ export type SupplierCardProps = {
 export type CardsColorScheme = {
     backgroundColor: string;
     borderColor: string;
-    textColor?: string
     minScore: number;
 }
   
+
+export type RatingColorScheme = {
+    backgroundColor: string;
+    borderColor: string;
+    textColor: string;
+    minScore: number;
+}

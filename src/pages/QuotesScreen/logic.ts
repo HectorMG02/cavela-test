@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, Quote, QuoteItem, Supplier } from "./types";
-import { CardsColorScheme } from "../../components/SupplierCard/types";
+import { cardColorSchemes, ratingColorSchemes } from "../../utils/colors";
 
 const SUPPLIERS: Supplier[] = [
     {
@@ -135,44 +135,6 @@ const QUOTE_ITEMS: QuoteItem[] = [
   ]
 
 
-const colorSchemes: CardsColorScheme[] = [
-    {
-        backgroundColor: '#B7CBC7',
-        borderColor: '#798E8B',
-        minScore: 4.5
-    },
-    {
-        backgroundColor: '#E5DABD',
-        borderColor: '#E6DBBF',
-        minScore: 4
-    },
-    {
-        backgroundColor: '#FFC8C8',
-        borderColor: '#FF0000',
-        minScore: 0
-    }
-]
-
-const scoreColorSchemes: CardsColorScheme[] = [
-    {
-        backgroundColor: '#63AB61',
-        borderColor: '#3E6841',
-        textColor: '#FFFFFF',
-        minScore: 4.5
-    },
-    {
-        backgroundColor: '#F1D3A2',
-        borderColor: '#B49A4C',
-        textColor: '#000000',
-        minScore: 4
-    },
-    {
-        backgroundColor: '#F2C8C0',
-        borderColor: '#CD7E6C',
-        minScore: 0
-    }
-]
-
 
 const useLogic = () => {
     const [loading, setLoading] = useState(true);
@@ -194,8 +156,8 @@ const useLogic = () => {
                 ...supplier,
                 supplier_id: supplier.supplier_id,
                 quoteItems: itemsBySupplier[supplier.supplier_id] || [],
-                colorScheme: colorSchemes.find(scheme => supplier.score >= scheme.minScore) || colorSchemes[2],
-                scoreColorScheme: scoreColorSchemes.find(scheme => supplier.score >= scheme.minScore) || scoreColorSchemes[2]
+                colorScheme: cardColorSchemes.find(scheme => supplier.score >= scheme.minScore) || cardColorSchemes[2],
+                scoreColorScheme: ratingColorSchemes.find(scheme => supplier.score >= scheme.minScore) || ratingColorSchemes[2]
             }));
 
             setCardsData(cards);
