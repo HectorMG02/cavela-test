@@ -1,15 +1,16 @@
-import { CardsColorScheme } from "./types";
+import { CardsColorScheme, RatingColorScheme } from "../../types/colorTypes";
 
-const useLogic = ( { colorScheme, scoreColorScheme } : { colorScheme : CardsColorScheme | undefined, 
-    scoreColorScheme : CardsColorScheme
+
+const useLogic = ( { colorScheme, ratingColorScheme } : { colorScheme : CardsColorScheme | undefined, 
+    ratingColorScheme : RatingColorScheme
     }) => { 
     
       const backgroundColor = colorScheme?.backgroundColor;
       const borderColor = colorScheme?.borderColor;
 
-      const scoreBackgroundColor = scoreColorScheme?.backgroundColor;
-    const scoreBorderColor = scoreColorScheme?.borderColor;
-    const scoreTextColor = scoreColorScheme?.textColor;
+      const scoreBackgroundColor = ratingColorScheme?.backgroundColor;
+    const scoreBorderColor = ratingColorScheme?.borderColor;
+    const scoreTextColor = ratingColorScheme?.textColor;
     
     return {
         backgroundColor,

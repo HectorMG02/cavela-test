@@ -8,7 +8,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
     name,
     rating,
     colorScheme,
-    scoreColorScheme,
+    ratingColorScheme,
     variants,
     closeCard,
 }) => {
@@ -18,9 +18,9 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
         scoreBackgroundColor,
         scoreBorderColor,
         scoreTextColor,
-    } = useLogic({ colorScheme, scoreColorScheme });
+    } = useLogic({ colorScheme, ratingColorScheme });
 
-    console.log(scoreColorScheme);
+    console.log(ratingColorScheme);
 
     return (
         <div

@@ -1,4 +1,4 @@
-import { CardsColorScheme } from "../../types/colorTypes";
+import { CardsColorScheme, RatingColorScheme } from "../../types/colorTypes";
 
 export type Variant = {
     variant?: string;
@@ -15,6 +15,6 @@ export type SupplierCardProps = {
     variants: Variant[];
     badges?: string[];
     colorScheme: CardsColorScheme;
-    scoreColorScheme: CardsColorScheme;
+    ratingColorScheme: RatingColorScheme;
     closeCard: () => void;
   };
