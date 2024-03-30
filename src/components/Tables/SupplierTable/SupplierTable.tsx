@@ -12,11 +12,12 @@ const SupplierTable = () => {
   return (
     <div className="flex flex-row items-center">
     <h2 className="text-xl font-bold text-gray-700 mr-4">Supplier 1</h2>
-    <RatingBox
+    <RatingBox  
                 backgroundColor={ratingColorSchemes[2].backgroundColor}
                 borderColor={ratingColorSchemes[2].borderColor}
                 textColor={ratingColorSchemes[2].textColor}
                 rating={"5.0"}
+                className="size-12 p-3"
             />
     <div className="flex-grow overflow-x-auto">
     <table className="w-[90%] divide-y divide-gray-500 text-left">

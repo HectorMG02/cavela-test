@@ -3,4 +3,5 @@ export interface Props {
     backgroundColor: string;
     borderColor: string;
     textColor: string;
+    className?: string;
 }

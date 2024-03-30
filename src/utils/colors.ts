@@ -1,4 +1,5 @@
-import { CardsColorScheme, RatingColorScheme } from "../components/SupplierCard/types"
+import { CardsColorScheme, RatingColorScheme } from "../types/colorTypes"
+
 
 export const cardColorSchemes: CardsColorScheme[] = [
     {

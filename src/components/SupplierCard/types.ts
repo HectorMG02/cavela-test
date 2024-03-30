@@ -1,3 +1,5 @@
+import { CardsColorScheme } from "../../types/colorTypes";
+
 export type Variant = {
     variant?: string;
     name: string;
@@ -16,17 +18,3 @@ export type SupplierCardProps = {
     scoreColorScheme: CardsColorScheme;
     closeCard: () => void;
   };
-
-export type CardsColorScheme = {
-    backgroundColor: string;
-    borderColor: string;
-    minScore: number;
-}
-  
-
-export type RatingColorScheme = {
-    backgroundColor: string;
-    borderColor: string;
-    textColor: string;
-    minScore: number;
-}
