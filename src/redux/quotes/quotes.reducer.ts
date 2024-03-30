@@ -3,7 +3,6 @@ import { QuotesAction, QuotesState } from "./quotes.types";
 const initialState: QuotesState = {
     allQuotes: [],
     availableQuotes: [],
-    savedQuotes: [],
     supplier_id: ''
 }
 

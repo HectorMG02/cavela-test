@@ -4,7 +4,7 @@ import RatingBox from "../../RatingBox/RatingBox";
 import useLogic from "./logic";
 
 const SupplierTable = () => {
-  const { allQuotes } = useLogic();
+  const { allQuotes, checkAvailableQuote, toggleQuote, createNewQuote } = useLogic();
 
 
   return (
@@ -51,9 +51,9 @@ const SupplierTable = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {quote.quoteItems.map((item: QuoteItem, itemIndex: number) => (
-                  <tr key={itemIndex}>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {item.variant}
+                  <tr key={itemIndex} className={`${checkAvailableQuote(item.supplier_id) && 'bg-gray-300' }`}>
+                   <td className="px-6 py-4 text-sm font-medium text-gray-900 truncate overflow-hidden relative cursor-pointer" style={{ maxWidth: '105px' }}>
+                      {item.variant.split("-")[1].trim()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {item.quantity}
@@ -73,8 +73,13 @@ const SupplierTable = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 
                     flex items-center justify-center
                     ">
-                      <input type="checkbox" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-                    </td>
+                      <input type="checkbox" 
+    disabled={checkAvailableQuote(item.supplier_id)}
+    onChange={() => toggleQuote(item)}
+    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" 
+    defaultChecked={checkAvailableQuote(item.supplier_id)}
+    />
+ </td>
                   </tr>
                 ))}
               </tbody>
@@ -85,6 +90,7 @@ const SupplierTable = () => {
      
      <div className="pb-20">
        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out active:bg-blue-800 hover:shadow-lg mb-5 mt-10 float-end"
+        onClick={createNewQuote}
       >
          Apply
        </button>
