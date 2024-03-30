@@ -39,9 +39,7 @@ const QuotesScreen = () => {
             />
         ));
     
-        const placeholders = Array(placeholdersToAdd).fill(null).map((_, index) => (
-            <PlaceholderCard key={`placeholder-${index + numberOfCards}`} />
-        ));
+        const placeholders = placeholdersToAdd > 0 ? [<PlaceholderCard key={`placeholder-${numberOfCards}`} />] : [];
     
         return (
             <>
