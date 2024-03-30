@@ -3,7 +3,6 @@ import SupplierCard from '../../components/Cards/SupplierCard/SupplierCard';
 import SupplierCardSkeleton from '../../components/Skeletons/SupplierCardSkeleton/SupplierCardSkeleton';
 import useLogic from './logic';
 import PlaceholderCard from '../../components/Cards/PlaceholderCard/PlaceholderCard';
-import PlaceholderCardSkeleton from '../../components/Skeletons/PlaceholderCardSkeleton/PlaceholderCardSkeleton';
 
 const QuotesScreen = () => {
     const { loading, quotes, closeCard } = useLogic();
@@ -11,34 +10,47 @@ const QuotesScreen = () => {
 
     const renderSkeletons = () => (
         <>
-         <SupplierCardSkeleton />
             <SupplierCardSkeleton />
-            <PlaceholderCardSkeleton />
-            </>
+            <SupplierCardSkeleton />
+            <SupplierCardSkeleton />
+        </>
     )
 
-    const renderCards = () => (
-         <>
-            {quotes && quotes.map((quote: any, index: number) => (
-                <SupplierCard
-                    key={index}
-                    name={quote.name}
-                    rating={Number(quote.score).toFixed(1)}
-                    variants={quote.quoteItems.map((item: any) => ({
-                        name: item.variant,
-                        quantity: item.quantity,
-                        unitCost: item['unit_cost'].slice(1),
-                        total: parseFloat(item['unit_cost'].slice(1)) * (item.quantity).toFixed(2),
-                    }))}
-                    colorScheme={quote.colorScheme}
-                    ratingColorScheme={quote.ratingColorScheme}
-                    closeCard={() => closeCard(quote.supplier_id)}
-                />
-            ))}
+    const renderCards = () => {
+        const numberOfCards = quotes.length;
+        const placeholdersToAdd = Math.max(0, 3 - numberOfCards);
+    
 
-            <PlaceholderCard />
+
+        const supplierCards = quotes.slice(0, 3).map((quote: any) => (
+            <SupplierCard
+                key={quote.supplier_id}
+                name={quote.name}
+                rating={Number(quote.score).toFixed(1)}
+                variants={quote.quoteItems.map((item: any) => ({
+                    name: item.variant,
+                    quantity: item.quantity,
+                    unitCost: item['unit_cost'].slice(1),
+                    total: (parseFloat(item['unit_cost'].slice(1)) * item.quantity).toFixed(2),
+                }))}
+                colorScheme={quote.colorScheme}
+                ratingColorScheme={quote.ratingColorScheme}
+                closeCard={() => closeCard(quote.supplier_id)}
+            />
+        ));
+    
+        const placeholders = Array(placeholdersToAdd).fill(null).map((_, index) => (
+            <PlaceholderCard key={`placeholder-${index + numberOfCards}`} />
+        ));
+    
+        return (
+            <>
+                {supplierCards}
+                {placeholders}
             </>
-    );
+        );
+    };
+    
 
     return (
         <>
