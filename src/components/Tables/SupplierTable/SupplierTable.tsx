@@ -125,6 +125,8 @@ const SupplierTable = ({ onClose }: { onClose: () => void }) => {
                                                         item.supplier_id
                                                     )}
                                                 />
+
+                                                
                                             </td>
                                         </tr>
                                     )
