@@ -118,7 +118,7 @@ const SupplierTable = ({ onClose }: { onClose: () => void }) => {
                                                         item.supplier_id
                                                     )}
                                                     onChange={() =>
-                                                        toggleQuote(item)
+                                                        toggleQuote(item.quote_item_id, quote)
                                                     }
                                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                                                     defaultChecked={checkAvailableQuote(

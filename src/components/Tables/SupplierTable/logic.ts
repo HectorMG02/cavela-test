@@ -27,24 +27,36 @@ const useLogic = ({ onClose } : { onClose: () => void }) => {
      }
 
   
-     const toggleQuote = (quote: any) => {
-        const quoteAlreadySelected = !!selectedQuotes.find((item: any) => item.quote_item_id === quote.quote_item_id);
+     const toggleQuote = (quoteItemId: string, quoteData: any) => {
+        const isQuoteSelected = selectedQuotes.some(quote => quote.quote_item_id === quoteItemId);
     
-        if (!quoteAlreadySelected) {
-            setSelectedQuotes([...selectedQuotes, quote]);
-            // Establece el supplier_id si aún no se ha seleccionado uno
-            if (!selectedSupplierId) {
-                setSelectedSupplierId(quote.supplier_id);
+        if (isQuoteSelected) {
+            const newSelectedQuotes = selectedQuotes.filter(quote => quote.quote_item_id !== quoteItemId);
+            setSelectedQuotes(newSelectedQuotes);
+    
+            if (!newSelectedQuotes.find(quote => quote.supplier_id === selectedSupplierId)) {
+                setSelectedSupplierId(null);
             }
         } else {
-            setSelectedQuotes(selectedQuotes.filter((item: any) => item.quote_item_id !== quote.quote_item_id));
-            // Si era el último quoteItem de ese supplier, limpia el selectedSupplierId
-            if (selectedQuotes.filter((item: any) => item.supplier_id === quote.supplier_id).length === 1) {
-                console.log("se elimina")
-                setSelectedSupplierId(null);
+            if (!selectedSupplierId || quoteData.supplier_id === selectedSupplierId) {
+                const newQuote = {
+                    supplier_id: quoteData.supplier_id,
+                    name: quoteData.name,
+                    score: quoteData.score,
+                    quote_item_id: quoteItemId,
+                    ...quoteData.quoteItems.find((item: any) => item.quote_item_id === quoteItemId),
+                    colorScheme: quoteData.colorScheme,
+                    ratingColorScheme: quoteData.ratingColorScheme,
+                };
+                setSelectedQuotes([...selectedQuotes, newQuote]);
+                
+                if (!selectedSupplierId) {
+                    setSelectedSupplierId(quoteData.supplier_id);
+                }
             }
         }
     };
+    
     
 
      
@@ -83,6 +95,7 @@ const useLogic = ({ onClose } : { onClose: () => void }) => {
     };
     
     const createNewQuote = () => {
+        console.log(selectedQuotes)
         const groupedQuotes = groupBySupplierId(selectedQuotes);
         const formattedQuotes = formatQuotesForDispatch(groupedQuotes);
         dispatch(createQuote(formattedQuotes[0]));
