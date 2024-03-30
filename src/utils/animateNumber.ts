@@ -5,7 +5,7 @@ export const animateNumbers = (
     onUpdate: (value: number) => void,
     onComplete?: () => void
 ) => {
-    const speed = 3.5;
+    const speed = 2.25;
     const increment = ((finalValue - initialValue) / (60 * duration)) * speed;
     let currentValue = initialValue;
 
@@ -21,7 +21,7 @@ export const animateNumbers = (
         }
 
         onUpdate(currentValue);
-    }, 1000 / (60 * speed));
+    }, 1000 / (60 * duration));
 
     return intervalId;
 };

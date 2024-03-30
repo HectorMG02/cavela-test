@@ -7,7 +7,7 @@ const useAnimateNumber = (targetNumber: number) => {
   const [animatedNumber, setAnimatedNumber] = useState(0);
 
   useEffect(() => {
-    const duration = 2;
+    const duration = 1;
 
     const intervalId = animateNumbers(
       animatedNumber,
