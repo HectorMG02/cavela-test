@@ -1,4 +1,4 @@
-import { CardsColorScheme, RatingColorScheme } from "../../types/colorTypes";
+import { CardsColorScheme, RatingColorScheme } from "../../../types/colorTypes";
 
 
 const useLogic = ( { colorScheme, ratingColorScheme } : { colorScheme : CardsColorScheme | undefined, 

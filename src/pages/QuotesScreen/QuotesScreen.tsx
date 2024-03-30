@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import SupplierCard from '../../components/SupplierCard/SupplierCard';
+import SupplierCard from '../../components/Cards/SupplierCard/SupplierCard';
 import SupplierCardSkeleton from '../../components/Skeletons/SupplierCardSkeleton/SupplierCardSkeleton';
 import useLogic from './logic';
-import PlaceholderCard from '../../components/PlaceholderCard/PlaceholderCard';
+import PlaceholderCard from '../../components/Cards/PlaceholderCard/PlaceholderCard';
 import PlaceholderCardSkeleton from '../../components/Skeletons/PlaceholderCardSkeleton/PlaceholderCardSkeleton';
 
 const QuotesScreen = () => {

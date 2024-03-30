@@ -10,7 +10,8 @@ const SupplierTable = () => {
   
 
   return (
-    <div className="flex flex-row items-center">
+    <div>
+          <div className="flex flex-row items-center">
     <div className="flex flex-row items-center mr-4 mt-10">
       <h2 className="text-xl font-bold text-gray-700 mr-2">Supplier 1</h2>
       <RatingBox
@@ -77,10 +78,14 @@ const SupplierTable = () => {
           ))}
         </tbody>
     </table>
-
-          
-
       </div>
+    </div>
+
+<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10 float-end
+focus:outline-none focus:shadow-outline transition duration-300 ease-in-out active:bg-blue-800 hover:shadow-lg
+">
+  Apply
+</button>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import QuotesTable from '../Tables/QuotesTable/QuotesTable';
+import QuotesTable from '../../Tables/QuotesTable/QuotesTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
-import RatingBox from '../RatingBox/RatingBox';
+import RatingBox from '../../RatingBox/RatingBox';
 
 const SupplierCard: React.FC<SupplierCardProps> = ({
     name,
