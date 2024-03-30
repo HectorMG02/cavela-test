@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../../../redux/types";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createQuote } from '../../../redux/quotes/quotes.action';
 import { cardColorSchemes, ratingColorSchemes } from '../../../utils/colors';
 
@@ -10,12 +10,16 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dispatch = useDispatch<any>();
     const { allQuotes, availableQuotes } = useSelector((state: RootState) => state.quotes);
-    const [ selectedQuotes, setSelectedQuotes ] = useState<any[]>([]);
     const [ selectedSupplierId, setSelectedSupplierId ] = useState<any>(null);
+    const [ selectedQuotes, setSelectedQuotes ] = useState<any[]>([]);
 
-    console.log(currentData, isEditing)
 
      const checkAvailableQuote  = (supplier_id: string) => {
+        if(isEditing && currentData){
+            return currentData.supplier_id !== supplier_id
+        }
+
+
         const supplierIsUsed =  !!availableQuotes.find((quote: any) => {
             return quote.supplier_id === supplier_id
         })
@@ -25,6 +29,14 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
         }
 
         return supplierIsUsed
+     }
+
+     const checkInputChecked = (quoteItemId: string, supplierId: string) => {
+        if(!isEditing){
+            return checkAvailableQuote(supplierId)
+        }
+ 
+        return selectedQuotes.find(quote => quote.quote_item_id === quoteItemId);
      }
 
   
@@ -58,8 +70,6 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
         }
     };
     
-    
-
      
      const groupBySupplierId = (quotes: any) => {
         return quotes.reduce((acc: any, current: any) => {
@@ -96,12 +106,32 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
     };
     
     const createNewQuote = () => {
-        console.log(selectedQuotes)
         const groupedQuotes = groupBySupplierId(selectedQuotes);
         const formattedQuotes = formatQuotesForDispatch(groupedQuotes);
         dispatch(createQuote(formattedQuotes[0]));
         onClose();
     };
+
+
+    useEffect(() => {
+        if(isEditing && currentData){
+            const currentSelectedQuotes = currentData.quoteItems.map((item: any) => {
+                return {
+                    supplier_id: currentData.supplier_id,
+                    name: currentData.name,
+                    score: currentData.score,
+                    quote_item_id: item.quote_item_id,
+                    ...item,
+                    colorScheme: currentData.colorScheme,
+                    ratingColorScheme: currentData.ratingColorScheme,
+                }
+            })
+
+            setSelectedQuotes(currentSelectedQuotes);
+            setSelectedSupplierId(currentData.supplier_id);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return {
         allQuotes,
@@ -109,7 +139,8 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
         toggleQuote,
         createNewQuote,
         selectedSupplierId,
-        selectedQuotes
+        selectedQuotes,
+        checkInputChecked
     }
 }
 

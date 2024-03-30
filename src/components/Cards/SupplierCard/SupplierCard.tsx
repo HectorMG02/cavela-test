@@ -26,13 +26,12 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
         <div
             className="w-full rounded shadow-lg p-4 md:m-8 relative border-4 hover:border-gray-400 transition-all duration-300 ease-in-out cursor-pointer hover:shadow-xl hover:scale-105
             "
-            onClick={() => setOpen(true)}
             style={{
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
             }}
         >
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4" onClick={() => setOpen(true)}>
                 <div className="p-3">
                     <h3 className="font-bold text-3xl">{quote.name}</h3>
                 </div>
@@ -48,7 +47,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
             <button
                 className={`absolute top-2 right-2 transform translate-x-6 -translate-y-1/2 text-black hover:text-gray-700 border-[3px] border-[${quote.colorScheme?.borderColor}] rounded-full p-1 bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out
                 hover:scale-110`}
-                onClick={() => closeCard}
+                onClick={() => closeCard(quote.supplier_id)}
             >
                 <svg
                     className="size-6"
@@ -68,7 +67,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
             <button
                 className={`absolute top-2 right-2 transform translate-x-6 translate-y-6 text-black hover:text-gray-700 border-[3px] border-[${quote.colorScheme?.borderColor}] rounded-full p-1 bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-110
                 `}
-                onClick={() => closeCard}
+                onClick={() => closeCard(quote.supplier_id)}
             >
                 <svg
                     className="size-6"
@@ -92,6 +91,8 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
                     total: (parseFloat(item['unit_cost'].slice(1)) * item.quantity).toFixed(2),
                 }))} />
         </div>
+
+        
             {
                 open && <EditQuoteModal onClose={onClose}
                 quoteData={quote}

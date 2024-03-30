@@ -4,8 +4,7 @@ import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 
 const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onClose: () => void, isEditing?: boolean, currentData?: any}) => {
-    const { allQuotes, checkAvailableQuote, toggleQuote, createNewQuote } =
-        useLogic({ onClose, isEditing, currentData });
+    const { allQuotes, checkAvailableQuote, toggleQuote, createNewQuote, checkInputChecked } = useLogic({ onClose, isEditing, currentData });
 
     return (
         <div>
@@ -108,9 +107,7 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                                 {item.sample_cost}
                                             </td>
                                             <td
-                                                className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 
-                    flex items-center justify-center
-                    "
+                                                className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex items-center justify-center"
                                             >
                                                 <input
                                                     type="checkbox"
@@ -121,12 +118,8 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                                         toggleQuote(item.quote_item_id, quote)
                                                     }
                                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                                                    defaultChecked={checkAvailableQuote(
-                                                        item.supplier_id
-                                                    )}
+                                                    defaultChecked={checkInputChecked(item.quote_item_id, item.supplier_id)}
                                                 />
-
-                                                
                                             </td>
                                         </tr>
                                     )
