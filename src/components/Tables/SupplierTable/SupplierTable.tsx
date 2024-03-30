@@ -3,9 +3,9 @@ import { QuoteItem } from '../../../types/dataTypes';
 import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 
-const SupplierTable = ({ onClose }: { onClose: () => void }) => {
+const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onClose: () => void, isEditing?: boolean, currentData?: any}) => {
     const { allQuotes, checkAvailableQuote, toggleQuote, createNewQuote } =
-        useLogic({ onClose });
+        useLogic({ onClose, isEditing, currentData });
 
     return (
         <div>

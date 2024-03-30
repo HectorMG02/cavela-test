@@ -1,4 +1,4 @@
-import NewQuoteModal from "../../NewQuoteModal/NewQuoteModal";
+import NewQuoteModal from "../../QuoteModal/NewQuoteModal";
 import useLogic from "./logic";
 
 const PlaceholderCard = () => {

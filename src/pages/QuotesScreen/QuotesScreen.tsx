@@ -24,16 +24,7 @@ const QuotesScreen = () => {
         const supplierCards = availableQuotes.slice(0, 3).map((quote: any) => (
             <SupplierCard
                 key={quote.supplier_id}
-                name={quote.name}
-                rating={Number(quote.score).toFixed(1)}
-                variants={quote.quoteItems.map((item: any) => ({
-                    name: item.variant,
-                    quantity: item.quantity,
-                    unitCost: item['unit_cost'].slice(1),
-                    total: (parseFloat(item['unit_cost'].slice(1)) * item.quantity).toFixed(2),
-                }))}
-                colorScheme={quote.colorScheme}
-                ratingColorScheme={quote.ratingColorScheme}
+                quote={quote}
                 closeCard={() => closeCard(quote.supplier_id)}
             />
         ));

@@ -9,12 +9,25 @@ export type Variant = {
   };
  
   
-export type SupplierCardProps = {
-    name: string;
-    rating: string;
-    variants: Variant[];
-    badges?: string[];
-    colorScheme: CardsColorScheme;
-    ratingColorScheme: RatingColorScheme;
-    closeCard: () => void;
-  };
+
+export interface SupplierCardProps {
+    quote: QuoteData;
+    closeCard: (supplierId: string) => void;
+}
+  
+
+export interface QuoteData {
+  supplier_id: string;
+  name: string;
+  score: number;
+  quoteItems: Array<QuoteItemData>;
+  colorScheme: CardsColorScheme;
+  ratingColorScheme: RatingColorScheme;
+}
+
+
+export interface QuoteItemData {
+  variant: string;
+  quantity: number;
+  unit_cost: string;
+}

@@ -6,13 +6,14 @@ import { createQuote } from '../../../redux/quotes/quotes.action';
 import { cardColorSchemes, ratingColorSchemes } from '../../../utils/colors';
 
 
-const useLogic = ({ onClose } : { onClose: () => void }) => {
+const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, isEditing: boolean, currentData: any }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dispatch = useDispatch<any>();
     const { allQuotes, availableQuotes } = useSelector((state: RootState) => state.quotes);
     const [ selectedQuotes, setSelectedQuotes ] = useState<any[]>([]);
     const [ selectedSupplierId, setSelectedSupplierId ] = useState<any>(null);
 
+    console.log(currentData, isEditing)
 
      const checkAvailableQuote  = (supplier_id: string) => {
         const supplierIsUsed =  !!availableQuotes.find((quote: any) => {
