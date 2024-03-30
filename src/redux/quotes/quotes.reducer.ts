@@ -1,7 +1,8 @@
 import { QuotesAction, QuotesState } from "./quotes.types";
 
 const initialState: QuotesState = {
-    quotes: [],
+    allQuotes: [],
+    availableQuotes: [],
     savedQuotes: [],
     supplier_id: ''
 }
@@ -12,13 +13,14 @@ const quotesReducer = (state = initialState, action: QuotesAction) => {
         case 'GET_QUOTES':
             return {
                 ...state,
-                quotes: action.payload.quotes,
+                allQuotes: action.payload.quotes,
+                availableQuotes: action.payload.quotes
             }
-
         case 'CLOSE_QUOTE':
             return {
                 ...state,
-                quotes: state.quotes.filter(quote => quote.supplier_id !== action.payload.supplier_id)
+                supplier_id: action.payload.supplier_id,
+                availableQuotes: state.availableQuotes.filter(quote => quote.supplier_id !== action.payload.supplier_id)
             }
             
         default:

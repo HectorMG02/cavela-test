@@ -5,8 +5,7 @@ import useLogic from './logic';
 import PlaceholderCard from '../../components/Cards/PlaceholderCard/PlaceholderCard';
 
 const QuotesScreen = () => {
-    const { loading, quotes, closeCard } = useLogic();
-
+    const { loading, availableQuotes, closeCard } = useLogic();
 
     const renderSkeletons = () => (
         <>
@@ -17,12 +16,12 @@ const QuotesScreen = () => {
     )
 
     const renderCards = () => {
-        const numberOfCards = quotes.length;
+        const numberOfCards = availableQuotes.length || 0;
         const placeholdersToAdd = Math.max(0, 3 - numberOfCards);
     
 
 
-        const supplierCards = quotes.slice(0, 3).map((quote: any) => (
+        const supplierCards = availableQuotes.slice(0, 3).map((quote: any) => (
             <SupplierCard
                 key={quote.supplier_id}
                 name={quote.name}

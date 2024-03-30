@@ -13,6 +13,7 @@ export const getQuotes = () => async (dispatch: any) => {
     })
     dispatch(toggleLoading(false, 3000));
 }
+  
 
 export const closeQuote = (supplier_id: string) => ({
     type: 'CLOSE_QUOTE',

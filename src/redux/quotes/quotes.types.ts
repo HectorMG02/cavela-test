@@ -9,8 +9,10 @@ export enum ActionType {
 
 
 export interface QuotesState {
+    quotes?: Supplier[];
     supplier_id: string;
-    quotes: Supplier[];
+    allQuotes: Supplier[];
+    availableQuotes: Supplier[];
     savedQuotes: Quote[];
 }
 
