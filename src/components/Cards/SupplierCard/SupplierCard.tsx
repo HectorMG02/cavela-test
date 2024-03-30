@@ -3,6 +3,7 @@ import QuotesTable from '../../Tables/QuotesTable/QuotesTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
 import RatingBox from '../../RatingBox/RatingBox';
+import NewQuoteModal from '../../NewQuoteModal/NewQuoteModal';
 
 const SupplierCard: React.FC<SupplierCardProps> = ({
     name,
@@ -18,12 +19,17 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
         scoreBackgroundColor,
         scoreBorderColor,
         scoreTextColor,
+        open,
+        setOpen,
+        onClose
     } = useLogic({ colorScheme, ratingColorScheme });
 
     return (
+        <div>
         <div
             className="w-full rounded shadow-lg p-4 md:m-8 relative border-4 hover:border-gray-400 transition-all duration-300 ease-in-out cursor-pointer hover:shadow-xl hover:scale-105
             "
+            onClick={() => setOpen(true)}
             style={{
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
@@ -83,6 +89,10 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
             </button>
 
             <QuotesTable variants={variants} />
+        </div>
+            {
+                open && <NewQuoteModal onClose={onClose} />
+            }
         </div>
     );
 };

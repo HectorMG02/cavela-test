@@ -1,10 +1,16 @@
+import { useState } from "react";
 import { CardsColorScheme, RatingColorScheme } from "../../../types/colorTypes";
 
 
 const useLogic = ( { colorScheme, ratingColorScheme } : { colorScheme : CardsColorScheme | undefined, 
     ratingColorScheme : RatingColorScheme
     }) => { 
-    
+      const [open, setOpen] = useState(false);
+
+      const onClose = () => {
+          setOpen(false);
+      }
+  
       const backgroundColor = colorScheme?.backgroundColor;
       const borderColor = colorScheme?.borderColor;
 
@@ -17,7 +23,10 @@ const useLogic = ( { colorScheme, ratingColorScheme } : { colorScheme : CardsCol
         borderColor,
         scoreBackgroundColor,
         scoreBorderColor,
-        scoreTextColor
+        scoreTextColor,
+        open,
+        setOpen,
+        onClose
     }
 }
 
