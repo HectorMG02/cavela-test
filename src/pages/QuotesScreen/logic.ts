@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "./types";
-import { cardColorSchemes, ratingColorSchemes } from "../../utils/colors";
+import { processData } from "../../utils/processData";
 import { QUOTE_ITEMS, SUPPLIERS } from "../../utils/data";
-import { QuoteItem } from "../../types/dataTypes";
-
 
 
 
@@ -16,28 +14,12 @@ const useLogic = () => {
     }
 
     useEffect(() => {
-        const processData = () => {
-            const itemsBySupplier = QUOTE_ITEMS.reduce((acc: Record<string, QuoteItem[]>, item) => {
-                if (!acc[item.supplier_id]) acc[item.supplier_id] = [];
-                
-                acc[item.supplier_id].push(item);
-                return acc;
-            }, {});
-            const cards: Card[] = SUPPLIERS.map(supplier => ({
-                supplier_id: supplier.supplier_id,
-                name: supplier.name,
-                score: supplier.score,
-                quoteItems: itemsBySupplier[supplier.supplier_id] || [],
-                colorScheme: cardColorSchemes.find(scheme => supplier.score >= scheme.minScore) || cardColorSchemes[2],
-                ratingColorScheme: ratingColorSchemes.find(scheme => supplier.score >= scheme.minScore) || ratingColorSchemes[2]
-            }));
-
-
+        setTimeout(() => {
+            const cards = processData(QUOTE_ITEMS, SUPPLIERS);
             setCardsData(cards);
             setLoading(false);
-        };
+        }, 100);        
 
-        setTimeout(processData, 100 /** 3000 */);
     }, []);
 
     console.log(cardsData)
