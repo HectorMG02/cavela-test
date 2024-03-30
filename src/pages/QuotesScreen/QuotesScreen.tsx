@@ -6,7 +6,7 @@ import PlaceholderCard from '../../components/Cards/PlaceholderCard/PlaceholderC
 import PlaceholderCardSkeleton from '../../components/Skeletons/PlaceholderCardSkeleton/PlaceholderCardSkeleton';
 
 const QuotesScreen = () => {
-    const { loading, cardsData, closeCard } = useLogic();
+    const { loading, quotes, closeCard } = useLogic();
 
 
     const renderSkeletons = () => (
@@ -19,20 +19,20 @@ const QuotesScreen = () => {
 
     const renderCards = () => (
          <>
-            {cardsData.map((card: any, index: number) => (
+            {quotes && quotes.map((quote: any, index: number) => (
                 <SupplierCard
                     key={index}
-                    name={card.name}
-                    rating={Number(card.score).toFixed(1)}
-                    variants={card.quoteItems.map((item: any) => ({
+                    name={quote.name}
+                    rating={Number(quote.score).toFixed(1)}
+                    variants={quote.quoteItems.map((item: any) => ({
                         name: item.variant,
                         quantity: item.quantity,
                         unitCost: item['unit_cost'].slice(1),
                         total: parseFloat(item['unit_cost'].slice(1)) * (item.quantity).toFixed(2),
                     }))}
-                    colorScheme={card.colorScheme}
-                    ratingColorScheme={card.ratingColorScheme}
-                    closeCard={() => closeCard(card.supplier_id)}
+                    colorScheme={quote.colorScheme}
+                    ratingColorScheme={quote.ratingColorScheme}
+                    closeCard={() => closeCard(quote.supplier_id)}
                 />
             ))}
 
