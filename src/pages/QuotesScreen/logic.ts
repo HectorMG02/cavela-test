@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { getQuotes } from "../../redux/quotes/quotes.action";
+import { getQuotes, closeQuote } from "../../redux/quotes/quotes.action";
 import { RootState } from "../../redux/types";
 
 
@@ -12,8 +12,7 @@ const useLogic = () => {
     const { quotes } = useSelector((state: RootState) => state.quotes);
 
     const closeCard = (supplier_id: string) => {
-        // setCardsData(cardsData.filter(card => card.supplier_id !== supplier_id));
-        console.log(supplier_id)
+        dispatch(closeQuote(supplier_id));
     }
 
 
@@ -21,7 +20,7 @@ const useLogic = () => {
         dispatch(getQuotes());
     }, [dispatch]);
 
-    
+
 
     
     return {

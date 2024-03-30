@@ -1,4 +1,4 @@
-import { Quote } from "../../types/dataTypes";
+import { Quote, Supplier } from "../../types/dataTypes";
 
 export enum ActionType {
     GET_QUOTES = 'GET_QUOTES',
@@ -9,7 +9,8 @@ export enum ActionType {
 
 
 export interface QuotesState {
-    quotes: Quote[];
+    supplier_id: string;
+    quotes: Supplier[];
     savedQuotes: Quote[];
 }
 
