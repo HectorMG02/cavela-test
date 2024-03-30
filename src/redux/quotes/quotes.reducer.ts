@@ -15,6 +15,11 @@ const quotesReducer = (state = initialState, action: QuotesAction) => {
                 allQuotes: action.payload.quotes,
                 availableQuotes: action.payload.quotes
             }
+        case 'CREATE_QUOTE':
+            return {
+                ...state,
+                availableQuotes: [...state.availableQuotes, action.payload.newQuoteData]
+            }
         case 'CLOSE_QUOTE':
             return {
                 ...state,

@@ -4,7 +4,7 @@ import { RootState } from "../../../redux/types";
 import { useState } from 'react';
 
 
-const useLogic = () => {
+const useLogic = ({ onClose } : { onClose: () => void }) => {
      const { allQuotes, availableQuotes } = useSelector((state: RootState) => state.quotes);
     const [ selectedQuotes, setSelectedQuotes ] = useState<any[]>([]);
 
@@ -28,6 +28,7 @@ const useLogic = () => {
      
     const createNewQuote = () => {
         console.log('Create new quote', selectedQuotes)
+        onClose();
     }
 
     return {

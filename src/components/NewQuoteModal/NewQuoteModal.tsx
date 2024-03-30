@@ -17,7 +17,7 @@ const NewQuoteModal = ({ onClose }: { onClose: () => void }) => {
                     </h3>
                 </div>
 
-                <SupplierTable />
+                <SupplierTable onClose={onClose} />
             </div>
         </div>
     );
