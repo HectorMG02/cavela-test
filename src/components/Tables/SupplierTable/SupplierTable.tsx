@@ -8,15 +8,10 @@ const SupplierTable = () => {
   
 
   return (
-    <div className="flex flex-col">
-    <div className="flex justify-between items-center mb-4">
-      <h3 className="text-lg leading-6 font-medium text-gray-900">Suppliers</h3>
-      <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-        Add Supplier
-      </button>
-    </div>
-    <div className="overflow-x-auto">
-    <table className="min-w-full divide-y divide-gray-200">
+    <div className="flex flex-row items-center">
+    <h2 className="text-xl font-bold text-gray-700 mr-4">Supplier 1</h2>
+    <div className="flex-grow overflow-x-auto">
+    <table className="w-[90%] divide-y divide-gray-500 text-left">
         <thead className="bg-gray-50">
           <tr>
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -36,6 +31,9 @@ const SupplierTable = () => {
             </th>
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Sample Cost
+            </th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Add to Quote
             </th>
           </tr>
         </thead>
@@ -60,10 +58,16 @@ const SupplierTable = () => {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {supplier.sampleCost}
               </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <input type="checkbox" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+              </td>
             </tr>
           ))}
         </tbody>
-      </table>
+    </table>
+
+          
+
       </div>
     </div>
   );

@@ -202,7 +202,7 @@ const useLogic = () => {
             setLoading(false);
         };
 
-        setTimeout(processData, 3000);
+        setTimeout(processData, 100 /** 3000 */);
     }, []);
 
     console.log(cardsData)
