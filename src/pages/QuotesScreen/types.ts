@@ -17,9 +17,9 @@ export interface QuoteItem {
     variant: string;
     moq: number;
     quantity: number;
-    "unit cost": string;
-    "lead time": string;
-    "sample cost": string;
+    "unit_cost": string;
+    "lead_time": string;
+    "sample_cost": string;
     badges: [string, boolean | null][];
 }
 

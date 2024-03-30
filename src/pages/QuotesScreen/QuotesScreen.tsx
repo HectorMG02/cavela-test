@@ -10,25 +10,25 @@ const QuotesScreen = () => {
 
 
     const renderSkeletons = () => (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 full-width">
-            <SupplierCardSkeleton />
+        <>
+         <SupplierCardSkeleton />
             <SupplierCardSkeleton />
             <PlaceholderCardSkeleton />
-        </div>
+            </>
     )
 
     const renderCards = () => (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 full-width">
+         <>
             {cardsData.map((card: any, index: number) => (
                 <SupplierCard
                     key={index}
                     name={card.name}
-                    rating={card.score}
+                    rating={Number(card.score).toFixed(1)}
                     variants={card.quoteItems.map((item: any) => ({
                         name: item.variant,
                         quantity: item.quantity,
-                        unitCost: item['unit cost'].slice(1),
-                        total: parseFloat(item['unit cost'].slice(1)) * (item.quantity).toFixed(2),
+                        unitCost: item['unit_cost'].slice(1),
+                        total: parseFloat(item['unit_cost'].slice(1)) * (item.quantity).toFixed(2),
                     }))}
                     colorScheme={card.colorScheme}
                     scoreColorScheme={card.scoreColorScheme}
@@ -37,7 +37,7 @@ const QuotesScreen = () => {
             ))}
 
             <PlaceholderCard />
-        </div>
+            </>
     );
 
     return (
@@ -46,7 +46,9 @@ const QuotesScreen = () => {
                 <h1 className="text-4xl mb-6">Quotes Selection</h1>
                 <div className="h-1 bg-gray-300 mb-6 w-full" />
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-[120%]">
             {loading ? renderSkeletons() : renderCards()}
+            </div>
         </>
     );
 };

@@ -9,7 +9,7 @@ export type Variant = {
   
 export type SupplierCardProps = {
     name: string;
-    rating: number;
+    rating: string;
     variants: Variant[];
     badges?: string[];
     colorScheme: CardsColorScheme;

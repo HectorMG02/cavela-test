@@ -27,9 +27,9 @@ const QuotesTable = ({variants}: { variants: Variant[]}) => {
         <tbody className="divide-y divide-gray-200 bg-white">
           {variants.map((item: Variant, index: number) => (
             <tr key={index}>
-              <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                {item.name.split("-")[1].trim()}
-              </td>
+                <td className="px-6 py-4 text-sm font-medium text-gray-900 truncate overflow-hidden relative cursor-pointer" style={{ maxWidth: '150px' }}>
+                    {item.name.split("-")[1].trim()}
+                </td>
               <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                 {item.quantity}
               </td>
