@@ -13,10 +13,24 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
     const [ selectedSupplierId, setSelectedSupplierId ] = useState<any>(null);
     const [ selectedQuotes, setSelectedQuotes ] = useState<any[]>([]);
 
+    const checkSupplierIsUsed = (supplier_id: string) => {
+        return availableQuotes.some((quote: any) => {
+            return quote.supplier_id === supplier_id
+        })
+    }
 
-     const checkAvailableQuote  = (supplier_id: string) => {
+    // true hidden, false is visible
+    const checkQuoteIsDisabled  = (supplier_id: string) => {
         if(isEditing && currentData){
-            return currentData.supplier_id !== supplier_id
+            if(currentData.supplier_id !== supplier_id){
+                if(selectedQuotes.length > 0){
+                    return true;
+                } else{
+                    return checkSupplierIsUsed(supplier_id)
+                }
+            }
+
+            return false
         }
 
 
@@ -33,7 +47,7 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
 
      const checkInputChecked = (quoteItemId: string, supplierId: string) => {
         if(!isEditing){
-            return checkAvailableQuote(supplierId)
+            return checkQuoteIsDisabled(supplierId)
         }
  
         return selectedQuotes.find(quote => quote.quote_item_id === quoteItemId);
@@ -135,7 +149,7 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
 
     return {
         allQuotes,
-        checkAvailableQuote,
+        checkQuoteIsDisabled,
         toggleQuote,
         createNewQuote,
         selectedSupplierId,

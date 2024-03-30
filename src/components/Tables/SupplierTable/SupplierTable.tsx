@@ -4,7 +4,7 @@ import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 
 const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onClose: () => void, isEditing?: boolean, currentData?: any}) => {
-    const { allQuotes, checkAvailableQuote, toggleQuote, createNewQuote, checkInputChecked } = useLogic({ onClose, isEditing, currentData });
+    const { allQuotes, checkQuoteIsDisabled, toggleQuote, createNewQuote, checkInputChecked } = useLogic({ onClose, isEditing, currentData });
 
     return (
         <div>
@@ -78,7 +78,7 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                         <tr
                                             key={itemIndex}
                                             className={`${
-                                                checkAvailableQuote(
+                                                checkQuoteIsDisabled(
                                                     item.supplier_id
                                                 ) && 'bg-gray-300'
                                             }`}
@@ -111,7 +111,7 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                             >
                                                 <input
                                                     type="checkbox"
-                                                    disabled={checkAvailableQuote(
+                                                    disabled={checkQuoteIsDisabled(
                                                         item.supplier_id
                                                     )}
                                                     onChange={() =>
