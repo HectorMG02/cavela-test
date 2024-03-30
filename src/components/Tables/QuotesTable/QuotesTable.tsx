@@ -1,9 +1,10 @@
-// QuotesTable.tsx
+
+import AnimatedNumber from '../../AnimatedNumber/AnimatedNumber';
 import { Variant } from '../../Cards/SupplierCard/types';
 import useLogic from './logic';
 
 const QuotesTable = ({variants}: { variants: Variant[]}) => {
-  const { animatedTotal } = useLogic({ variants })
+  const { sumTotal } = useLogic({ variants })
 
   return (
     <div className="overflow-auto shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -27,7 +28,7 @@ const QuotesTable = ({variants}: { variants: Variant[]}) => {
         <tbody className="divide-y divide-gray-200 bg-white">
           {variants.map((item: Variant, index: number) => (
             <tr key={index}>
-                <td className="px-6 py-4 text-sm font-medium text-gray-900 truncate overflow-hidden relative cursor-pointer" style={{ maxWidth: '150px' }}>
+                <td className="px-6 py-4 text-sm font-medium text-gray-900 truncate overflow-hidden relative cursor-pointer" style={{ maxWidth: '10px' }}>
                     {item.name.split("-")[1].trim()}
                 </td>
               <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -46,7 +47,7 @@ const QuotesTable = ({variants}: { variants: Variant[]}) => {
               Total
             </td>
             <td className="px-3 py-4 text-sm font-semibold text-gray-900">
-              {`$${animatedTotal.toFixed(2)}`}
+              <AnimatedNumber value={sumTotal} />
             </td>
           </tr>
         </tbody>
