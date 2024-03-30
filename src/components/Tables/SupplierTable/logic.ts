@@ -1,40 +1,114 @@
-const useLogic = () => {
-    const supplierData = [
-       {
-            name: "Supplier 1",
-            quotes: [
-                { variant: 'Black Ash', quantity: 250, cost: '$1', leadTime: '35 days', moq: 250, sampleCost: '$50' },
-                { variant: 'Brown Ash', quantity: 250, cost: '$1.50', leadTime: '40 days', moq: 250, sampleCost: '$60' },
-            ]
-       },
-       {
-            name: "Supplier 2",
-            quotes: [
-                { variant: 'Black Ash', quantity: 250, cost: '$1.20', leadTime: '35 days', moq: 250, sampleCost: '$50' },
-                { variant: 'Brown Ash', quantity: 250, cost: '$1.70', leadTime: '40 days', moq: 250, sampleCost: '$60' },
-                { variant: 'White Ash', quantity: 250, cost: '$1.70', leadTime: '40 days', moq: 250, sampleCost: '$60' },
-                { variant: 'Grey Ash', quantity: 250, cost: '$1.70', leadTime: '40 days', moq: 250, sampleCost: '$60' },
-            ]
-       },
-       {
-        name: "Supplier 3",
-        quotes: [
-            { variant: 'Black Ash', quantity: 250, cost: '$1.20', leadTime: '35 days', moq: 250, sampleCost: '$50' },
-            { variant: 'Brown Ash', quantity: 250, cost: '$1.70', leadTime: '40 days', moq: 250, sampleCost: '$60' },
-            { variant: 'White Ash', quantity: 250, cost: '$1.70', leadTime: '40 days', moq: 250, sampleCost: '$60' },
-        ]
-        },
-        {
-            name: "Supplier 4",
-            quotes: [
-                { variant: 'Black Ash', quantity: 250, cost: '$1.20', leadTime: '35 days', moq: 250, sampleCost: '$50' },
-                { variant: 'Brown Ash', quantity: 250, cost: '$1.70', leadTime: '40 days', moq: 250, sampleCost: '$60' },
-            ]
-       }
-      ];
-      
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from "../../../redux/types";
+import { useState } from 'react';
+import { createQuote } from '../../../redux/quotes/quotes.action';
+import { cardColorSchemes, ratingColorSchemes } from '../../../utils/colors';
+
+
+const useLogic = ({ onClose } : { onClose: () => void }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const dispatch = useDispatch<any>();
+    const { allQuotes, availableQuotes } = useSelector((state: RootState) => state.quotes);
+    const [ selectedQuotes, setSelectedQuotes ] = useState<any[]>([]);
+    const [ selectedSupplierId, setSelectedSupplierId ] = useState<any>(null);
+
+
+     const checkAvailableQuote  = (supplier_id: string) => {
+        const supplierIsUsed =  !!availableQuotes.find((quote: any) => {
+            return quote.supplier_id === supplier_id
+        })
+
+        if(!supplierIsUsed && selectedSupplierId != null){
+            return selectedSupplierId !== supplier_id
+        }
+
+        return supplierIsUsed
+     }
+
+  
+     const toggleQuote = (quoteItemId: string, quoteData: any) => {
+        const isQuoteSelected = selectedQuotes.some(quote => quote.quote_item_id === quoteItemId);
+    
+        if (isQuoteSelected) {
+            const newSelectedQuotes = selectedQuotes.filter(quote => quote.quote_item_id !== quoteItemId);
+            setSelectedQuotes(newSelectedQuotes);
+    
+            if (!newSelectedQuotes.find(quote => quote.supplier_id === selectedSupplierId)) {
+                setSelectedSupplierId(null);
+            }
+        } else {
+            if (!selectedSupplierId || quoteData.supplier_id === selectedSupplierId) {
+                const newQuote = {
+                    supplier_id: quoteData.supplier_id,
+                    name: quoteData.name,
+                    score: quoteData.score,
+                    quote_item_id: quoteItemId,
+                    ...quoteData.quoteItems.find((item: any) => item.quote_item_id === quoteItemId),
+                    colorScheme: quoteData.colorScheme,
+                    ratingColorScheme: quoteData.ratingColorScheme,
+                };
+                setSelectedQuotes([...selectedQuotes, newQuote]);
+                
+                if (!selectedSupplierId) {
+                    setSelectedSupplierId(quoteData.supplier_id);
+                }
+            }
+        }
+    };
+    
+    
+
+     
+     const groupBySupplierId = (quotes: any) => {
+        return quotes.reduce((acc: any, current: any) => {
+            const { supplier_id } = current;
+            if (!acc[supplier_id]) {
+                acc[supplier_id] = [];
+            }
+            acc[supplier_id].push(current);
+            return acc;
+        }, {});
+    };
+    
+    const formatQuotesForDispatch = (groupedQuotes: any) => {
+        return Object.keys(groupedQuotes).map((supplier_id) => {
+            const supplier = groupedQuotes[supplier_id][0];
+            return {
+                supplier_id,
+                name: supplier.name,
+                score: supplier.score,
+                quoteItems: groupedQuotes[supplier_id].map((item: any) => ({
+                    quote_item_id: item.quote_item_id,
+                    variant: item.variant,
+                    moq: item.moq,
+                    quantity: item.quantity,
+                    unit_cost: item.unit_cost,
+                    lead_time: item.lead_time,
+                    sample_cost: item.sample_cost,
+                    badges: item.badges,
+                })),
+                colorScheme: cardColorSchemes.find(scheme => supplier.score >= scheme.minScore),
+                ratingColorScheme: ratingColorSchemes.find(scheme => supplier.score >= scheme.minScore)
+            };
+        });
+    };
+    
+    const createNewQuote = () => {
+        console.log(selectedQuotes)
+        const groupedQuotes = groupBySupplierId(selectedQuotes);
+        const formattedQuotes = formatQuotesForDispatch(groupedQuotes);
+        dispatch(createQuote(formattedQuotes[0]));
+        onClose();
+    };
+
     return {
-        supplierData
+        allQuotes,
+        checkAvailableQuote,
+        toggleQuote,
+        createNewQuote,
+        selectedSupplierId,
+        selectedQuotes
     }
 }
 

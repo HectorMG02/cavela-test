@@ -20,8 +20,6 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
         scoreTextColor,
     } = useLogic({ colorScheme, ratingColorScheme });
 
-    console.log(ratingColorScheme);
-
     return (
         <div
             className="w-full rounded shadow-lg p-4 md:m-8 relative border-4 hover:border-gray-400 transition-all duration-300 ease-in-out cursor-pointer hover:shadow-xl hover:scale-105

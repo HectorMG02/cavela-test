@@ -9,7 +9,7 @@ export const cardColorSchemes: CardsColorScheme[] = [
     },
     {
         backgroundColor: '#E5DABD',
-        borderColor: '#E6DBBF',
+        borderColor: '#B49A4C',
         minScore: 4
     },
     {

@@ -16,7 +16,7 @@ export const processData = (quoteItems: QuoteItem[], suppliers: Supplier[]) => {
       name: supplier.name,
       score: supplier.score,
       quoteItems: itemsBySupplier[supplier.supplier_id] || [],
-      colorScheme: cardColorSchemes.find(scheme => supplier.score >= scheme.minScore) || cardColorSchemes[2],
-      ratingColorScheme: ratingColorSchemes.find(scheme => supplier.score >= scheme.minScore) || ratingColorSchemes[2]
+      colorScheme: cardColorSchemes.find(scheme => supplier.score >= scheme.minScore),
+      ratingColorScheme: ratingColorSchemes.find(scheme => supplier.score >= scheme.minScore)
     }));
   };
