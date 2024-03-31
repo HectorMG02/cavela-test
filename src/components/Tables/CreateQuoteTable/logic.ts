@@ -36,8 +36,8 @@ const useLogic = ({ onClose } : { onClose: () => void}) => {
     }
 
 
-    const checkInputChecked = (supplier_id: string) => {
-        return checkQuoteIsDisabled(supplier_id);
+    const checkInputChecked = (quote_item_id: string) => {
+        return availableQuotes.filter((quote: any) => quote.quoteItems.some((item: any) => item.quote_item_id === quote_item_id)).length > 0;
     }
  
  
@@ -84,6 +84,7 @@ const useLogic = ({ onClose } : { onClose: () => void}) => {
 
         const groupedQuotes = groupBySupplierId(selectedQuotes);
         const formattedQuotes = formatQuotesForDispatch(groupedQuotes);
+
         dispatch(createQuote(formattedQuotes[0]));
         onClose();
     };
