@@ -4,7 +4,7 @@ import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 
 const EditQuoteTable = ({ onClose, currentData }: { onClose: () => void, currentData: any}) => {
-    const { allQuotes, checkQuoteIsDisabled, toggleQuote, updateQuote, checkInputChecked, checkCanSubmit } = useLogic({ onClose, currentData });
+    const { allQuotes, checkQuoteIsDisabled, toggleQuote, updateQuoteData, checkInputChecked } = useLogic({ onClose, currentData });
 
     return (
         <div>
@@ -131,10 +131,8 @@ const EditQuoteTable = ({ onClose, currentData }: { onClose: () => void, current
             <div className="pb-20">
                 <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out active:bg-blue-800 hover:shadow-lg mb-5 mt-10 float-end
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                    "
-                    onClick={updateQuote}
-                    disabled={checkCanSubmit()}
+                    disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={updateQuoteData}
                 >
                     Update changes
                 </button>
