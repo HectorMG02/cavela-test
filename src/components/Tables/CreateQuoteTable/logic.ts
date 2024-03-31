@@ -17,15 +17,12 @@ const useLogic = ({ onClose } : { onClose: () => void}) => {
         const supplierIsUsed = availableQuotes.filter((quote: any) => quote.supplier_id === supplier_id).length > 0;
 
         if(supplierIsUsed){
-            if(selectedQuotes.filter((quote: any) => quote.supplier_id === supplier_id).length > 0){
-                return false;
-            }
-
-            return true;
+           return true;
         }
 
-        if(selectedQuotes.length === 0) {
-            return false
+        if(selectedQuotes.length > 0){
+            const selectedQuote = selectedQuotes.find((quote: any) => quote.supplier_id === supplier_id);
+            return selectedQuote ? false : true;
         }
     }
 
@@ -44,8 +41,8 @@ const useLogic = ({ onClose } : { onClose: () => void}) => {
     }
  
  
-     
-     const groupBySupplierId = (quotes: any) => {
+
+    const groupBySupplierId = (quotes: any) => {
         return quotes.reduce((acc: any, current: any) => {
             const { supplier_id } = current;
             if (!acc[supplier_id]) {
