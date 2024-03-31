@@ -13,27 +13,8 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
     const [ selectedSupplierId, setSelectedSupplierId ] = useState<any>(null);
     const [ selectedQuotes, setSelectedQuotes ] = useState<any[]>([]);
 
-    const checkSupplierIsUsed = (supplier_id: string) => {
-        return availableQuotes.some((quote: any) => {
-            return quote.supplier_id === supplier_id
-        })
-    }
 
-    // true hidden, false is visible
-    const checkQuoteIsDisabled  = (supplier_id: string) => {
-        if(isEditing && currentData){
-            if(currentData.supplier_id !== supplier_id){
-                if(selectedQuotes.length > 0){
-                    return true;
-                } else{
-                    return checkSupplierIsUsed(supplier_id)
-                }
-            }
-
-            return false
-        }
-
-
+    const checkCreateQuoteSuppliersDisabled = (supplier_id: string) => {
         const supplierIsUsed =  !!availableQuotes.find((quote: any) => {
             return quote.supplier_id === supplier_id
         })
@@ -43,10 +24,24 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
         }
 
         return supplierIsUsed
+    }
+ 
+
+    const checkQuoteIsDisabled  = (supplier_id: string, supplier_name?: string) => {
+        // if(supplier_name) console.log("after: " + supplier_name, selectedQuotes.length, selectedQuotes)
+
+        if(!isEditing && selectedQuotes.length === 0){
+            return checkCreateQuoteSuppliersDisabled(supplier_id)
+        }
+
+        return selectedSupplierId !== supplier_id
      }
+
 
      const checkInputChecked = (quoteItemId: string, supplierId: string) => {
         if(!isEditing){
+            // TODO: FIX
+            return false;
             return checkQuoteIsDisabled(supplierId)
         }
  
@@ -54,35 +49,22 @@ const useLogic = ({ onClose, isEditing, currentData } : { onClose: () => void, i
      }
 
   
-     const toggleQuote = (quoteItemId: string, quoteData: any) => {
-        const isQuoteSelected = selectedQuotes.some(quote => quote.quote_item_id === quoteItemId);
-    
-        if (isQuoteSelected) {
-            const newSelectedQuotes = selectedQuotes.filter(quote => quote.quote_item_id !== quoteItemId);
-            setSelectedQuotes(newSelectedQuotes);
-    
-            if (!newSelectedQuotes.find(quote => quote.supplier_id === selectedSupplierId)) {
+     const toggleQuote = (quoteItemId: string, quoteData: any, insert: boolean) => {
+        if(insert) {
+            setSelectedQuotes([...selectedQuotes, quoteData]);
+            setSelectedSupplierId(quoteData.supplier_id);
+        } else {
+            setSelectedQuotes(selectedQuotes.filter(quote => quote.quote_item_id !== quoteItemId));
+            if(selectedQuotes.length === 1){
                 setSelectedSupplierId(null);
             }
-        } else {
-            if (!selectedSupplierId || quoteData.supplier_id === selectedSupplierId) {
-                const newQuote = {
-                    supplier_id: quoteData.supplier_id,
-                    name: quoteData.name,
-                    score: quoteData.score,
-                    quote_item_id: quoteItemId,
-                    ...quoteData.quoteItems.find((item: any) => item.quote_item_id === quoteItemId),
-                    colorScheme: quoteData.colorScheme,
-                    ratingColorScheme: quoteData.ratingColorScheme,
-                };
-                setSelectedQuotes([...selectedQuotes, newQuote]);
-                
-                if (!selectedSupplierId) {
-                    setSelectedSupplierId(quoteData.supplier_id);
-                }
-            }
         }
+
+
+
+
     };
+    
     
      
      const groupBySupplierId = (quotes: any) => {

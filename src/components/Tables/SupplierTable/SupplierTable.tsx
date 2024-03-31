@@ -15,9 +15,7 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                             {quote.name}
                         </h2>
                         <RatingBox
-                            backgroundColor={
-                                quote.ratingColorScheme.backgroundColor
-                            }
+                            backgroundColor={quote.ratingColorScheme.backgroundColor}
                             borderColor={quote.ratingColorScheme.borderColor}
                             textColor={quote.ratingColorScheme.textColor}
                             rating={Number(quote.score).toFixed(1)}
@@ -79,7 +77,7 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                             key={itemIndex}
                                             className={`${
                                                 checkQuoteIsDisabled(
-                                                    item.supplier_id
+                                                    item.supplier_id, quote.name
                                                 ) && 'bg-gray-300'
                                             }`}
                                         >
@@ -112,10 +110,10 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                                 <input
                                                     type="checkbox"
                                                     disabled={checkQuoteIsDisabled(
-                                                        item.supplier_id
+                                                        item.supplier_id,
                                                     )}
-                                                    onChange={() =>
-                                                        toggleQuote(item.quote_item_id, quote)
+                                                    onChange={(e) =>
+                                                        toggleQuote(item.quote_item_id, quote, e.target.checked)
                                                     }
                                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                                                     defaultChecked={checkInputChecked(item.quote_item_id, item.supplier_id)}
