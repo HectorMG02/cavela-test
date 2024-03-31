@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import SupplierTable from '../Tables/SupplierTable/SupplierTable';
+import SupplierTable from '../Tables/CreateQuoteTable/CreateQuoteTable';
 import useLogic from './logic';
 
 const EditQuoteModal = ({ onClose, quoteData }: { onClose: () => void, quoteData: any }) => {

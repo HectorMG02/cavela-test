@@ -3,8 +3,8 @@ import { QuoteItem } from '../../../types/dataTypes';
 import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 
-const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onClose: () => void, isEditing?: boolean, currentData?: any}) => {
-    const { allQuotes, checkQuoteIsDisabled, toggleQuote, createNewQuote, checkInputChecked } = useLogic({ onClose, isEditing, currentData });
+const CreateQuoteTable = ({ onClose }: { onClose: () => void}) => {
+    const { allQuotes, checkQuoteIsDisabled, toggleQuote, createNewQuote, checkInputChecked } = useLogic({ onClose });
 
     return (
         <div>
@@ -77,7 +77,7 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                             key={itemIndex}
                                             className={`${
                                                 checkQuoteIsDisabled(
-                                                    item.supplier_id, quote.name
+                                                    item.supplier_id
                                                 ) && 'bg-gray-300'
                                             }`}
                                         >
@@ -113,10 +113,10 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
                                                         item.supplier_id,
                                                     )}
                                                     onChange={(e) =>
-                                                        toggleQuote(item.quote_item_id, quote, e.target.checked)
+                                                        toggleQuote(item.quote_item_id, quote.supplier_id, e.target.checked)
                                                     }
                                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                                                    defaultChecked={checkInputChecked(item.quote_item_id, item.supplier_id)}
+                                                    defaultChecked={checkInputChecked(item.quote_item_id)}
                                                 />
                                             </td>
                                         </tr>
@@ -140,4 +140,4 @@ const SupplierTable = ({ onClose, isEditing = false, currentData = null }: { onC
     );
 };
 
-export default SupplierTable;
+export default CreateQuoteTable;
