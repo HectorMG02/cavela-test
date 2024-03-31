@@ -20,6 +20,21 @@ const quotesReducer = (state = initialState, action: QuotesAction) => {
                 ...state,
                 availableQuotes: [...state.availableQuotes, action.payload.newQuoteData]
             }
+
+        case 'UPDATE_QUOTE':
+            return {
+                ...state,
+                supplier_id: action.payload.supplier_id,
+                availableQuotes: state.availableQuotes.map(quote => {
+                    if(quote.supplier_id === action.payload.supplier_id){
+                        return {
+                            ...quote,
+                            quoteItems: action.payload.quoteItems
+                        }
+                    }
+                    return quote;
+                })
+            }
         case 'CLOSE_QUOTE':
             return {
                 ...state,

@@ -3,9 +3,8 @@ import { QuoteItem } from '../../../types/dataTypes';
 import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 
-const SupplierTable = ({ onClose }: { onClose: () => void }) => {
-    const { allQuotes, checkAvailableQuote, toggleQuote, createNewQuote } =
-        useLogic({ onClose });
+const CreateQuoteTable = ({ onClose }: { onClose: () => void}) => {
+    const { allQuotes, checkQuoteIsDisabled, toggleQuote, createNewQuote, checkInputChecked, checkCanSubmit } = useLogic({ onClose });
 
     return (
         <div>
@@ -16,9 +15,7 @@ const SupplierTable = ({ onClose }: { onClose: () => void }) => {
                             {quote.name}
                         </h2>
                         <RatingBox
-                            backgroundColor={
-                                quote.ratingColorScheme.backgroundColor
-                            }
+                            backgroundColor={quote.ratingColorScheme.backgroundColor}
                             borderColor={quote.ratingColorScheme.borderColor}
                             textColor={quote.ratingColorScheme.textColor}
                             rating={Number(quote.score).toFixed(1)}
@@ -79,7 +76,7 @@ const SupplierTable = ({ onClose }: { onClose: () => void }) => {
                                         <tr
                                             key={itemIndex}
                                             className={`${
-                                                checkAvailableQuote(
+                                                checkQuoteIsDisabled(
                                                     item.supplier_id
                                                 ) && 'bg-gray-300'
                                             }`}
@@ -108,25 +105,19 @@ const SupplierTable = ({ onClose }: { onClose: () => void }) => {
                                                 {item.sample_cost}
                                             </td>
                                             <td
-                                                className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 
-                    flex items-center justify-center
-                    "
+                                                className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex items-center justify-center"
                                             >
                                                 <input
                                                     type="checkbox"
-                                                    disabled={checkAvailableQuote(
-                                                        item.supplier_id
+                                                    disabled={checkQuoteIsDisabled(
+                                                        item.supplier_id,
                                                     )}
-                                                    onChange={() =>
-                                                        toggleQuote(item.quote_item_id, quote)
+                                                    onChange={(e) =>
+                                                        toggleQuote(item.quote_item_id, quote.supplier_id, e.target.checked)
                                                     }
                                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                                                    defaultChecked={checkAvailableQuote(
-                                                        item.supplier_id
-                                                    )}
+                                                    defaultChecked={checkInputChecked(item.quote_item_id)}
                                                 />
-
-                                                
                                             </td>
                                         </tr>
                                     )
@@ -139,8 +130,11 @@ const SupplierTable = ({ onClose }: { onClose: () => void }) => {
 
             <div className="pb-20">
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out active:bg-blue-800 hover:shadow-lg mb-5 mt-10 float-end"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out active:bg-blue-800 hover:shadow-lg mb-5 mt-10 float-end
+                    disabled:opacity-50 disabled:cursor-not-allowed
+                    "
                     onClick={createNewQuote}
+                    disabled={checkCanSubmit()}
                 >
                     Apply
                 </button>
@@ -149,4 +143,4 @@ const SupplierTable = ({ onClose }: { onClose: () => void }) => {
     );
 };
 
-export default SupplierTable;
+export default CreateQuoteTable;
