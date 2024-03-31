@@ -13,6 +13,10 @@ const useLogic = ({ onClose } : { onClose: () => void}) => {
     const [selectedSupplier, setSelectedSupplier] = useState<any>(null)
 
 
+    const checkCanSubmit = () => {
+        return !(selectedQuotes.length > 0);
+    }
+
     const checkQuoteIsDisabled = (supplier_id: string) => {
         const supplierIsUsed = availableQuotes.filter((quote: any) => quote.supplier_id === supplier_id).length > 0;
 
@@ -28,7 +32,7 @@ const useLogic = ({ onClose } : { onClose: () => void}) => {
 
 
     const toggleQuote = (quote_id: string, supplier_id: string, checked: boolean) => {
-    const supplierData = allQuotes.find((quote: any) => quote.supplier_id === supplier_id);
+        const supplierData = allQuotes.find((quote: any) => quote.supplier_id === supplier_id);
       const quoteItems = allQuotes.find((quote: any) => quote.supplier_id === supplier_id).quoteItems
       const quote = quoteItems.find((item: any) => item.quote_item_id === quote_id);
 
@@ -70,7 +74,8 @@ const useLogic = ({ onClose } : { onClose: () => void}) => {
         createNewQuote,
         checkQuoteIsDisabled,
         toggleQuote,
-        checkInputChecked
+        checkInputChecked,
+        checkCanSubmit
     }
 }
 

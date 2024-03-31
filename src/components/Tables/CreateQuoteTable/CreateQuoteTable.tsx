@@ -4,7 +4,7 @@ import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 
 const CreateQuoteTable = ({ onClose }: { onClose: () => void}) => {
-    const { allQuotes, checkQuoteIsDisabled, toggleQuote, createNewQuote, checkInputChecked } = useLogic({ onClose });
+    const { allQuotes, checkQuoteIsDisabled, toggleQuote, createNewQuote, checkInputChecked, checkCanSubmit } = useLogic({ onClose });
 
     return (
         <div>
@@ -130,8 +130,11 @@ const CreateQuoteTable = ({ onClose }: { onClose: () => void}) => {
 
             <div className="pb-20">
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out active:bg-blue-800 hover:shadow-lg mb-5 mt-10 float-end"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out active:bg-blue-800 hover:shadow-lg mb-5 mt-10 float-end
+                    disabled:opacity-50 disabled:cursor-not-allowed
+                    "
                     onClick={createNewQuote}
+                    disabled={checkCanSubmit()}
                 >
                     Apply
                 </button>
