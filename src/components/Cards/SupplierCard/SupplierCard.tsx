@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import QuotesSummaryTable from '../../Tables/QuotesSummaryTable/QuotesSummaryTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
 import RatingBox from '../../RatingBox/RatingBox';
 import QuoteModal from '../../QuoteModal/QuoteModal';
 
-const SupplierCard: React.FC<SupplierCardProps> = ({ quote, closeCard }) => {
+const SupplierCard = ({ quote, closeCard }: SupplierCardProps) => {
     const {
         backgroundColor,
         borderColor,
@@ -17,7 +16,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({ quote, closeCard }) => {
         setOpen,
         onClose,
     } = useLogic({ quote });
-
+ 
     return (
         <div>
             <div
