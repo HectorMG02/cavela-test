@@ -14,7 +14,7 @@ const QuotesScreen = () => {
             opacity: 1,
             y: 0,
             transition: {
-                delay: index * 0.4,
+                delay: index * 0.4 * 0.2,
             },
         }),
     };
@@ -37,8 +37,8 @@ const QuotesScreen = () => {
         const supplierCards = availableQuotes.slice(0, 3).map((quote: any, index) => (
             <motion.div
                 key={quote.supplier_id}
-                custom={index} // Pasamos el índice como prop custom para controlar el delay
-                variants={cardVariants} // Asegúrate de definir estas variantes
+                custom={index}
+                variants={cardVariants}
                 initial="hidden"
                 animate="visible"
 
