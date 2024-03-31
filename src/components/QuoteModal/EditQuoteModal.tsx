@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import EditQuoteTable from '../Tables/EditQuoteTable/EditQuoteTable';
+import QuoteTable from '../Tables/QuotesTable/QuotesTable';
 import useLogic from './logic';
 
 const EditQuoteModal = ({ onClose, quoteData }: { onClose: () => void, quoteData: any }) => {
@@ -18,8 +18,9 @@ const EditQuoteModal = ({ onClose, quoteData }: { onClose: () => void, quoteData
                     </h3>
                 </div>
 
-                <EditQuoteTable onClose={onClose} 
+                <QuoteTable onClose={onClose} 
                     currentData={quoteData}
+                    mode='edit'
                 />
             </div>
         </div>

@@ -24,15 +24,13 @@ export const createQuote = (newQuoteData: any) => ({
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const updateQuote = (supplier_id: string, quoteItems: unknown) => (dispatch: any) => {
-    dispatch({
-        type: 'UPDATE_QUOTE',
-        payload: {
-            supplier_id,
-            quoteItems,
-        }
-    })
-}
+export const updateQuote = (supplier_id: string, quoteItems: unknown) => ({
+    type: 'UPDATE_QUOTE',
+    payload: {
+        supplier_id,
+        quoteItems,
+    }
+})
   
 
 export const closeQuote = (supplier_id: string) => ({

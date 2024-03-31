@@ -1,4 +1,4 @@
-import CreateQuoteTable from '../Tables/CreateQuoteTable/CreateQuoteTable';
+import QuoteTable from '../Tables/QuotesTable/QuotesTable';
 import useLogic from './logic';
 
 const NewQuoteModal = ({ onClose }: { onClose: () => void }) => {
@@ -17,7 +17,7 @@ const NewQuoteModal = ({ onClose }: { onClose: () => void }) => {
                     </h3>
                 </div>
 
-                <CreateQuoteTable onClose={onClose} />
+                <QuoteTable onClose={onClose} mode='create'/>
             </div>
         </div>
     );

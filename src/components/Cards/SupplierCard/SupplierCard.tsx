@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import QuotesTable from '../../Tables/QuotesTable/QuotesTable';
+import QuotesSummaryTable from '../../Tables/QuotesSummaryTable/QuotesSummaryTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
 import RatingBox from '../../RatingBox/RatingBox';
@@ -84,7 +84,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
                 </svg>
             </button>
 
-            <QuotesTable variants={quote.quoteItems.map((item: any) => ({
+            <QuotesSummaryTable variants={quote.quoteItems.map((item: any) => ({
                     name: item.variant,
                     quantity: item.quantity,
                     unitCost: item['unit_cost'].slice(1),
