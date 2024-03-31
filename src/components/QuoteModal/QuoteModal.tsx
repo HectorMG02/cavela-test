@@ -1,7 +1,8 @@
-import QuoteTable from '../Tables/QuotesTable/QuotesTable';
 import useLogic from './logic';
+import QuoteTable from '../Tables/QuotesTable/QuotesTable';
+import { QuoteModalProps } from './types';
 
-const NewQuoteModal = ({ onClose }: { onClose: () => void }) => {
+const QuoteModal = ({ onClose, mode, quoteData = null }: QuoteModalProps) => {
     useLogic({ onClose });
 
     return (
@@ -13,14 +14,18 @@ const NewQuoteModal = ({ onClose }: { onClose: () => void }) => {
             ">
                 <div className="mt-3 text-center">
                     <h3 className="text-2xl leading-6 font-medium text-gray-900">
-                        Create A New Quote
+                        {
+                            mode === 'create' ? 'Create A New Quote' : 'Edit Quote'
+                        }
                     </h3>
                 </div>
 
-                <QuoteTable onClose={onClose} mode='create'/>
+                <QuoteTable onClose={onClose} mode={mode}
+                    currentData={quoteData}
+                />
             </div>
         </div>
     );
-};
+}
 
-export default NewQuoteModal;
+export default QuoteModal

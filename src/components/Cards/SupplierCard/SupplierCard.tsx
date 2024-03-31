@@ -4,7 +4,7 @@ import QuotesSummaryTable from '../../Tables/QuotesSummaryTable/QuotesSummaryTab
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
 import RatingBox from '../../RatingBox/RatingBox';
-import EditQuoteModal from '../../QuoteModal/EditQuoteModal';
+import QuoteModal from '../../QuoteModal/QuoteModal';
 
 const SupplierCard: React.FC<SupplierCardProps> = ({
     quote,
@@ -94,8 +94,8 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
         
             {
-                open && <EditQuoteModal onClose={onClose}
-                quoteData={quote}
+                open && <QuoteModal onClose={onClose}
+                quoteData={quote} mode='edit'
                 />
             }
         </div>

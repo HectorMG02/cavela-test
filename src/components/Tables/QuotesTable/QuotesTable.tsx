@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// QuoteTable.tsx
 import React from 'react';
 import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
@@ -8,8 +7,8 @@ import { QuoteItem } from '../../../types/dataTypes';
 
 
 
-const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData }) => {
-  const { allQuotes, toggleQuote, submitQuote, checkQuoteIsDisabled, checkInputChecked, checkCanSubmit } = useLogic({ onClose, currentData, mode });
+const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData = null }) => {
+  const { allQuotes, toggleQuote, submitQuote, checkQuoteIsDisabled, checkInputChecked, checkCanSubmit } = useLogic({ onClose, mode, currentData });
 
   return (
     <div>
