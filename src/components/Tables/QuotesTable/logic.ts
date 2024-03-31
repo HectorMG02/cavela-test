@@ -2,20 +2,15 @@
 // useQuoteLogic.ts
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UseQuoteLogicProps } from './types';
-import {
-    closeQuote,
-    createQuote,
-    updateQuote,
-} from '../../../redux/quotes/quotes.action';
+import { UseQuoteLogicProps } from './types'; // Asume definiciones de tipos adecuadas aquí
+import { closeQuote, createQuote, updateQuote } from '../../../redux/quotes/quotes.action';
+import { Quote, QuoteItem } from '../../../types/dataTypes';
 
 const useLogic = ({ onClose, currentData, mode }: UseQuoteLogicProps) => {
     const dispatch = useDispatch();
-    const { allQuotes, availableQuotes } = useSelector(
-        (state: any) => state.quotes
-    );
-    const [selectedQuotes, setSelectedQuotes] = useState<any[]>([]);
-    const [selectedSupplier, setSelectedSupplier] = useState<any>(null);
+    const { allQuotes, availableQuotes } = useSelector((state: any) => state.quotes);
+    const [selectedQuotes, setSelectedQuotes] = useState<QuoteItem[]>([]);
+    const [selectedSupplier, setSelectedSupplier] = useState<Quote | null>(null);
 
     useEffect(() => {
         if (mode === 'edit' && currentData) {
@@ -24,128 +19,59 @@ const useLogic = ({ onClose, currentData, mode }: UseQuoteLogicProps) => {
         }
     }, [mode, currentData]);
 
-    const toggleQuote = (
-        quote_id: string,
-        supplier_id: string,
-        checked: boolean
-    ) => {
-        if (mode === 'edit') {
-            const quoteItems = allQuotes.find(
-                (quote: any) => quote.supplier_id === supplier_id
-            ).quoteItems;
-            const quote = quoteItems.find(
-                (item: any) => item.quote_item_id === quote_id
-            );
+    const findQuoteData = (quote_id: string, supplier_id: string) => {
+        const supplierData = allQuotes.find((quote: any) => quote.supplier_id === supplier_id);
+        const quote = supplierData?.quoteItems.find((item: QuoteItem) => item.quote_item_id === quote_id);
+        return { supplierData, quote };
+    };
 
-            if (checked) {
-                setSelectedQuotes([...selectedQuotes, quote]);
-            } else {
-                setSelectedQuotes(
-                    selectedQuotes.filter(
-                        (quote: any) => quote.quote_item_id !== quote_id
-                    )
-                );
-            }
-        } else if (mode === 'create') {
-            const supplierData = allQuotes.find(
-                (quote: any) => quote.supplier_id === supplier_id
-            );
-            const quoteItems = allQuotes.find(
-                (quote: any) => quote.supplier_id === supplier_id
-            ).quoteItems;
-            const quote = quoteItems.find(
-                (item: any) => item.quote_item_id === quote_id
-            );
+    const toggleQuote = (quote_id: string, supplier_id: string, checked: boolean) => {
+        const { supplierData, quote } = findQuoteData(quote_id, supplier_id);
 
-            let newSelectedQuotes;
-            if (checked) {
-                newSelectedQuotes = [...selectedQuotes, quote];
-            } else {
-                newSelectedQuotes = selectedQuotes.filter(
-                    (quote: any) => quote.quote_item_id !== quote_id
-                );
-            }
-            setSelectedQuotes(newSelectedQuotes);
+        if (!quote) return; // Early exit if quote not found
 
-            if (newSelectedQuotes.length === 0) {
-                setSelectedSupplier(null);
-            } else {
-                setSelectedSupplier(supplierData);
-            }
-            
-        }
+        const newSelectedQuotes = checked
+            ? [...selectedQuotes, quote]
+            : selectedQuotes.filter((item) => item.quote_item_id !== quote_id);
+
+        setSelectedQuotes(newSelectedQuotes);
+        setSelectedSupplier(checked && newSelectedQuotes.length ? supplierData : null);
     };
 
     const submitQuote = () => {
-        if (mode === 'create') {
-            createNewQuote();
-        } else if (mode === 'edit') {
-            updateQuoteData();
-        }
-        onClose();
-    };
 
-    const createNewQuote = () => {
-        if (selectedQuotes.length === 0) {
+        if(selectedQuotes.length === 0){
+            if(mode === 'edit'){
+                dispatch(closeQuote(currentData.supplier_id));                
+            }
+            
             onClose();
             return;
         }
+ 
+        const quoteAction = mode === 'create'
+            ? () => dispatch(createQuote({ ...selectedSupplier, quoteItems: selectedQuotes }))
+            : () => dispatch(updateQuote(currentData.supplier_id, selectedQuotes));
 
-        const newQuote = {
-            ...selectedSupplier,
-            quoteItems: [...selectedQuotes],
-        };
-
-        dispatch(createQuote(newQuote));
-        onClose();
-    };
-
-    const updateQuoteData = () => {
-        if (selectedQuotes.length === 0) {
-            dispatch(closeQuote(currentData.supplier_id));
-        } else {
-            dispatch(updateQuote(currentData.supplier_id, selectedQuotes));
-        }
-
+        quoteAction();
         onClose();
     };
 
     const checkQuoteIsDisabled = (supplier_id: string) => {
-        if (mode === 'create') {
-            const supplierIsUsed =
-                availableQuotes.filter(
-                    (quote: any) => quote.supplier_id === supplier_id
-                ).length > 0;
-
-            if (supplierIsUsed) {
-                return true;
-            }
-
-            if (selectedQuotes.length > 0) {
-                const selectedQuote = selectedQuotes.find(
-                    (quote: any) => quote.supplier_id === supplier_id
-                );
-                return selectedQuote ? false : true;
-            }
-        } else if (mode === 'edit') {
-            return currentData.supplier_id !== supplier_id;
-        }
+        return mode === 'edit'
+            ? currentData.supplier_id !== supplier_id
+            : availableQuotes.some((quote: any) => quote.supplier_id === supplier_id) || (selectedQuotes.length > 0 && !selectedQuotes.some((quote) => quote.supplier_id === supplier_id));
     };
 
     const checkInputChecked = (quote_item_id: string) => {
-        return (
-            availableQuotes.filter((quote: any) =>
-                quote.quoteItems.some(
-                    (item: any) => item.quote_item_id === quote_item_id
-                )
-            ).length > 0
-        );
+        return availableQuotes.some((quote: any) => 
+            quote.quoteItems.some((item: QuoteItem) => item.quote_item_id === quote_item_id));
     };
 
     const checkCanSubmit = () => {
-        if (mode === 'create') {
-            return selectedQuotes.length === 0 || selectedSupplier === null;
-        }
+        if(mode === 'edit') return false;
+
+        return selectedQuotes.length === 0 || (mode === 'create' && !selectedSupplier);
     };
 
     return {
