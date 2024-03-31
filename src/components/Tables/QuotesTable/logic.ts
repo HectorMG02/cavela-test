@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// useQuoteLogic.ts
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UseQuoteLogicProps } from './types'; // Asume definiciones de tipos adecuadas aquí
+import { UseQuoteLogicProps } from './types';
 import { closeQuote, createQuote, updateQuote } from '../../../redux/quotes/quotes.action';
 import { Quote, QuoteItem } from '../../../types/dataTypes';
 
@@ -27,8 +26,7 @@ const useLogic = ({ onClose, currentData, mode }: UseQuoteLogicProps) => {
 
     const toggleQuote = (quote_id: string, supplier_id: string, checked: boolean) => {
         const { supplierData, quote } = findQuoteData(quote_id, supplier_id);
-
-        if (!quote) return; // Early exit if quote not found
+        if (!quote) return;
 
         const newSelectedQuotes = checked
             ? [...selectedQuotes, quote]
@@ -39,12 +37,11 @@ const useLogic = ({ onClose, currentData, mode }: UseQuoteLogicProps) => {
     };
 
     const submitQuote = () => {
-
         if(selectedQuotes.length === 0){
             if(mode === 'edit'){
                 dispatch(closeQuote(currentData.supplier_id));                
             }
-            
+
             onClose();
             return;
         }
