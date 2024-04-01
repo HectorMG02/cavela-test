@@ -1,4 +1,3 @@
-// hooks/useAnimateNumber.js
 import { useEffect, useState } from 'react';
 import { animateNumbers } from '../utils/animateNumber';
 
