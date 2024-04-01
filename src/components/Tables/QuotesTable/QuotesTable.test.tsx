@@ -1,34 +1,55 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi} from 'vitest';
-import QuotesTable from './QuotesTable'; // Update the import path as needed
-import useLogic from './logic';
+import QuotesTable from './QuotesTable';
+import { SupplierWithQuoteItemsType } from '../../../redux/types';
 
-const testSupplier1 = {
+const testSupplier1: SupplierWithQuoteItemsType = {
     supplier_id: '1',
-    name: 'Test Supplier',
-    score: '4.5',
-    ratingColorScheme: { backgroundColor: 'blue', borderColor: 'blue', textColor: 'white' },
+    name: 'Test Supplier 1',
+    score: 3.0,
+    ratingColorScheme: { backgroundColor: 'red', borderColor: 'red', textColor: 'white', minScore: 4 },
     quoteItems: [
         {
-            id: '1',
-            variant: 'product 1 - Test Variant',
-            quantity: '10',
-            cost: '100',
-            lead_time: '2 days',
+            quote_item_id: '1',
+            variant: 'product 1 - Test Variant 1',
+            quantity: 5,
+            moq: 20,
+            lead_time: '1 day',
+            supplier_id: '',
+            unit_cost: '',
+            sample_cost: '',
+            badges: []
         }
     ],
-  }
+    colorScheme: { backgroundColor: 'red', borderColor: 'red', minScore: 4},
+}
+
+
+  const testSupplier2: SupplierWithQuoteItemsType = {
+    supplier_id: '2',
+    name: 'Test Supplier 2',
+    score: 4.0,
+    ratingColorScheme: { backgroundColor: 'red', borderColor: 'red', textColor: 'white', minScore: 4 },
+    quoteItems: [
+        {
+            quote_item_id: '2',
+            variant: 'product 2- Test Variant 2',
+            quantity: 10,
+            moq: 15,
+            lead_time: '2 day',
+            supplier_id: '',
+            unit_cost: '',
+            sample_cost: '',
+            badges: []
+        }
+    ],
+    colorScheme: { backgroundColor: 'red', borderColor: 'red', minScore: 4},
+}
 
 const mockProps = {
     onClose: vi.fn(),
     mode: 'edit',
-    currentData: {
-      supplier_id: '1',
-      name: 'Test Supplier',
-      score: '4.5',
-      ratingColorScheme: { backgroundColor: 'blue', borderColor: 'blue', textColor: 'white' },
-      quoteItems: [],
-    },
+    currentData: testSupplier1,
   }; 
 
 
@@ -39,7 +60,8 @@ vi.mock('../../RatingBox/RatingBox', () => ({
 
 vi.mock('./logic', () => ({
     default: vi.fn(() => ({
-      allQuotes: [testSupplier1],
+      allQuotes: [testSupplier1, testSupplier2],
+      availableQuotes: [testSupplier1],
       toggleQuote: vi.fn(),
       submitQuote: vi.fn(),
       checkQuoteIsDisabled: vi.fn(),
@@ -78,7 +100,7 @@ describe('QuotesTable without Redux', () => {
     expect(screen.getByText(testSupplier1.name)).toBeInTheDocument();
    })
 
-      
  
+    
   });
   
