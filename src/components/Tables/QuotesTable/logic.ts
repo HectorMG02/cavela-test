@@ -51,8 +51,12 @@ const useLogic = ({ onClose, mode, currentData }: UseQuoteLogicProps) => {
         }
  
  
-        if (mode === 'create') dispatch(createQuote({ ...selectedSupplier, quoteItems: selectedQuotes }));
-        else if (mode === 'edit' && currentData) dispatch(updateQuote(currentData.supplier_id, selectedQuotes));
+        if (mode === 'create' && selectedSupplier) {
+            dispatch(createQuote({ ...selectedSupplier, quoteItems: selectedQuotes }));
+        }
+        else if (mode === 'edit' && currentData) {
+            dispatch(updateQuote(currentData.supplier_id, selectedQuotes));
+        }
 
         onClose();
     };

@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { getQuotes, closeQuote } from "../../redux/quotes/quotes.action";
 import { RootState } from "../../redux/types";
-
+import { AppDispatch } from "../../redux/store";
 
 
 const useLogic = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch<AppDispatch>();
     const { loading } = useSelector((state: RootState) => state.loading);
     const { availableQuotes } = useSelector((state: RootState) => state.quotes)
 

@@ -9,6 +9,7 @@ export type RootState = {
 }
 
 
+
   export type SupplierWithQuoteItemsType = {
     supplier_id: string;
     name: string;
