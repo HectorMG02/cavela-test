@@ -9,6 +9,7 @@ const QuoteModal = ({ onClose, mode, quoteData }: QuoteModalProps) => {
         <div
             className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-10"
             id="new-quote-modal"
+            data-testid="new-quote-modal"
         >
             <div className="relative top-10 mx-auto p-5 border w-[90%] h-[86%] shadow-lg rounded-md bg-white overflow-y-auto mt-5
             ">
