@@ -67,7 +67,7 @@ const QuotesScreen = () => {
                 <h1 className="text-4xl mb-6">Quotes Selection</h1>
                 <div className="h-1 bg-gray-300 mb-6 w-[95%]" />
             </div>
-            <div className="grid grid-cols-3 gap-10 w-[95%]">
+            <div className="grid md:grid-cols-3 gap-10 w-[95%]">
                 {loading ? renderSkeletons() : renderCards()}
             </div>
         </>
