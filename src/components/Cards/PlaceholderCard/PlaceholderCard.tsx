@@ -1,4 +1,4 @@
-import NewQuoteModal from "../../QuoteModal/NewQuoteModal";
+import QuoteModal from "../../QuoteModal/QuoteModal";
 import useLogic from "./logic";
 
 const PlaceholderCard = () => {
@@ -27,7 +27,7 @@ const PlaceholderCard = () => {
         </div>
 
             {
-                open && <NewQuoteModal onClose={onClose} />
+                open && <QuoteModal mode="create" onClose={onClose} />
             }
         </>
     );

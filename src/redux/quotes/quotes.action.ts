@@ -1,9 +1,11 @@
+import { QuoteItemType } from "../../types/dataTypes";
 import { QUOTE_ITEMS, SUPPLIERS } from "../../utils/data";
 import { processData } from "../../utils/processData";
 import { toggleLoading } from '../loading/loading.action';
+import { AppDispatch } from "../store";
+import { SupplierWithQuoteItemsType } from "../types";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getQuotes = () => async (dispatch: any) => {
+export const getQuotes = () => async (dispatch: AppDispatch) => {
     dispatch(toggleLoading(true));
     dispatch({
         type: 'GET_QUOTES',
@@ -15,24 +17,22 @@ export const getQuotes = () => async (dispatch: any) => {
 }
 
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createQuote = (newQuoteData: any) => ({
+
+export const createQuote = (newQuoteData: SupplierWithQuoteItemsType) => ({
     type: 'CREATE_QUOTE',
     payload: {
         newQuoteData
     }
 })
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const updateQuote = (supplier_id: string, quoteItems: unknown) => (dispatch: any) => {
-    dispatch({
-        type: 'UPDATE_QUOTE',
-        payload: {
-            supplier_id,
-            quoteItems,
-        }
-    })
-}
+
+export const updateQuote = (supplier_id: string, quoteItems: QuoteItemType[]) => ({
+    type: 'UPDATE_QUOTE',
+    payload: {
+        supplier_id,
+        quoteItems,
+    }
+})
   
 
 export const closeQuote = (supplier_id: string) => ({

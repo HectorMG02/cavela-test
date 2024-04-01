@@ -1,4 +1,4 @@
-import { CardsColorScheme, RatingColorScheme } from "../../../types/colorTypes";
+import { SupplierWithQuoteItemsType } from "../../../redux/types";
 
 export type Variant = {
     variant?: string;
@@ -11,20 +11,11 @@ export type Variant = {
   
 
 export interface SupplierCardProps {
-    quote: QuoteData;
+    quote: SupplierWithQuoteItemsType;
     closeCard: (supplierId: string) => void;
 }
   
-
-export interface QuoteData {
-  supplier_id: string;
-  name: string;
-  score: number;
-  quoteItems: Array<QuoteItemData>;
-  colorScheme: CardsColorScheme;
-  ratingColorScheme: RatingColorScheme;
-}
-
+ 
 
 export interface QuoteItemData {
   variant: string;

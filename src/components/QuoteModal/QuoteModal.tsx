@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import EditQuoteTable from '../Tables/EditQuoteTable/EditQuoteTable';
 import useLogic from './logic';
+import QuoteTable from '../Tables/QuotesTable/QuotesTable';
+import { QuoteModalProps } from './types';
 
-const EditQuoteModal = ({ onClose, quoteData }: { onClose: () => void, quoteData: any }) => {
+const QuoteModal = ({ onClose, mode, quoteData }: QuoteModalProps) => {
     useLogic({ onClose });
 
     return (
@@ -14,16 +14,18 @@ const EditQuoteModal = ({ onClose, quoteData }: { onClose: () => void, quoteData
             ">
                 <div className="mt-3 text-center">
                     <h3 className="text-2xl leading-6 font-medium text-gray-900">
-                        Edit The Quote
+                        {
+                            mode === 'create' ? 'Create A New Quote' : 'Edit Quote'
+                        }
                     </h3>
                 </div>
 
-                <EditQuoteTable onClose={onClose} 
+                <QuoteTable onClose={onClose} mode={mode}
                     currentData={quoteData}
                 />
             </div>
         </div>
     );
-};
+}
 
-export default EditQuoteModal;
+export default QuoteModal

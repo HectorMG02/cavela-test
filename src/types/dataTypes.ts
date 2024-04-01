@@ -1,15 +1,11 @@
-export interface Supplier {
-    supplier_id: string;
-    name: string;
-    score: number;
-}
+ 
 
-export interface Quote {
-    quote_items: string[];
+export type QuoteType = {
+    quote_items: QuoteItemType[];
     badges: [string, number | null][];
 }
 
-export interface QuoteItem {
+export type QuoteItemType = {
     supplier_id: string;
     quote_item_id: string;
     variant: string;

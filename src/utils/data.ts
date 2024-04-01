@@ -1,7 +1,7 @@
-import { Supplier, Quote, QuoteItem } from "../types/dataTypes"
+import { SupplierType, QuoteType, QuoteItemType } from "../types/dataTypes"
 
 
-export const SUPPLIERS: Supplier[] = [
+export const SUPPLIERS: SupplierType[] = [
     {
       "supplier_id": "597d3e89-7b7d-4f55-a0b5-861a08f58cad",
       "name": "Supplier 1",
@@ -26,7 +26,7 @@ export const SUPPLIERS: Supplier[] = [
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const QUOTES: Quote[] = [
+export const QUOTES: QuoteType[] = [
     {
       "quote_items": ["1be92e49-98a0-44e6-a9d4-7a9fd480b22c", "52fe34bf-2d54-48c1-a3e6-f7a8ee6560b7"],
       "badges": [
@@ -42,7 +42,7 @@ export const QUOTES: Quote[] = [
 
 
 
-export const QUOTE_ITEMS: QuoteItem[] = [
+export const QUOTE_ITEMS: QuoteItemType[] = [
     {
       "supplier_id": "597d3e89-7b7d-4f55-a0b5-861a08f58cad",
       "quote_item_id": "1be92e49-98a0-44e6-a9d4-7a9fd480b22c",
