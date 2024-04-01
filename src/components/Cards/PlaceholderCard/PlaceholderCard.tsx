@@ -8,6 +8,8 @@ const PlaceholderCard = () => {
       <>
         <div className="w-full rounded m-8 p-4 relative border-4 border-dashed cursor-pointer hover:border-gray-400 transition-all duration-300 ease-in-out group min-h-[300px] hover:scale-105"
             onClick={() => setOpen(true)}
+            data-testid="placeholder-card"
+            role="button"
         >
             <div className="flex justify-center items-center w-full h-full">
                 <svg
