@@ -7,7 +7,7 @@ import useAnimateNumber from './useAnimateNumber';
 
 
 vi.mock('../utils/animateNumber', () => ({
-  animateNumbers: vi.fn((initialValue, finalValue, duration, onUpdate) => {
+  animateNumbers: vi.fn((_initialValue, finalValue, _duration, onUpdate) => {
     onUpdate(finalValue);
     return { clear: () => {} };
   }),
