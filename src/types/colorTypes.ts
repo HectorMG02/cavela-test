@@ -1,9 +1,8 @@
-
-export type CardsColorScheme = {
+export type ColorScheme =  {
     backgroundColor: string;
     borderColor: string;
     minScore: number;
-}
+  }
   
 
 export type RatingColorScheme = {

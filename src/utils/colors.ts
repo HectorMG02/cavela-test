@@ -1,7 +1,7 @@
-import { CardsColorScheme, RatingColorScheme } from "../types/colorTypes"
+import { ColorScheme, RatingColorScheme } from "../types/colorTypes"
 
 
-export const cardColorSchemes: CardsColorScheme[] = [
+export const cardColorSchemes: ColorScheme[] = [
     {
         backgroundColor: '#B7CBC7',
         borderColor: '#798E8B',

@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { SupplierWithQuoteItemsType } from "../../redux/types";
+
 export interface QuoteModalProps {
     onClose: () => void;
     mode: 'create' | 'edit';
-    quoteData?: any;
+    quoteData?: SupplierWithQuoteItemsType
 }

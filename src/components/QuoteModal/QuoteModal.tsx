@@ -2,7 +2,7 @@ import useLogic from './logic';
 import QuoteTable from '../Tables/QuotesTable/QuotesTable';
 import { QuoteModalProps } from './types';
 
-const QuoteModal = ({ onClose, mode, quoteData = null }: QuoteModalProps) => {
+const QuoteModal = ({ onClose, mode, quoteData }: QuoteModalProps) => {
     useLogic({ onClose });
 
     return (

@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { SupplierWithQuoteItemsType } from "../../../redux/types";
+
 export interface UseQuoteLogicProps {
     onClose: () => void;
-    currentData?: any;
+    currentData?: SupplierWithQuoteItemsType;
     mode: 'create' | 'edit';
 }
 
 export interface QuoteTableProps {
     onClose: () => void;
     mode: 'create' | 'edit';
-    currentData?: any;
+    currentData?: SupplierWithQuoteItemsType;
   }

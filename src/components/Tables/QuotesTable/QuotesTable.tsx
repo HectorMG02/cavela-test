@@ -1,18 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 import { QuoteTableProps } from './types';
 import { QuoteItemType } from '../../../types/dataTypes';
+import { SupplierWithQuoteItemsType } from '../../../redux/types';
 
 
 
-const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData = null }) => {
+const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData }) => {
   const { allQuotes, toggleQuote, submitQuote, checkQuoteIsDisabled, checkInputChecked, checkCanSubmit } = useLogic({ onClose, mode, currentData });
 
   return (
     <div>
-      {allQuotes.map((quote: any, index: number) => (
+      {allQuotes.map((quote: SupplierWithQuoteItemsType, index: number) => (
         <div key={index} className="flex flex-row items-center mt-10">
           <div className="flex flex-row items-center mr-4 mt-[50px]">
             <h2 className="text-xl font-bold text-gray-700 mr-2">
