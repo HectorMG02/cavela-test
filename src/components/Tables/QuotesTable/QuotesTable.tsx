@@ -3,7 +3,7 @@ import React from 'react';
 import RatingBox from '../../RatingBox/RatingBox';
 import useLogic from './logic';
 import { QuoteTableProps } from './types';
-import { QuoteItem } from '../../../types/dataTypes';
+import { QuoteItemType } from '../../../types/dataTypes';
 
 
 
@@ -76,7 +76,7 @@ const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData = nu
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {quote.quoteItems.map(
-                                    (item: QuoteItem, itemIndex: number) => (
+                                    (item: QuoteItemType, itemIndex: number) => (
                                         <tr
                                             key={itemIndex}
                                             className={`${

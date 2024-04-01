@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import QuotesSummaryTable from '../../Tables/QuotesSummaryTable/QuotesSummaryTable';
 import { SupplierCardProps } from './types';
 import useLogic from './logic';
 import RatingBox from '../../RatingBox/RatingBox';
 import QuoteModal from '../../QuoteModal/QuoteModal';
+import { QuoteItemType } from '../../../types/dataTypes';
 
 const SupplierCard = ({ quote, closeCard }: SupplierCardProps) => {
     const {
@@ -42,7 +42,7 @@ const SupplierCard = ({ quote, closeCard }: SupplierCardProps) => {
                     </div>
 
                     <QuotesSummaryTable
-                        variants={quote.quoteItems.map((item: any) => ({
+                        variants={quote.quoteItems.map((item: QuoteItemType) => ({
                             name: item.variant,
                             quantity: item.quantity,
                             unitCost: item['unit_cost'].slice(1),

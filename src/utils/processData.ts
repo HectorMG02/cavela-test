@@ -1,17 +1,17 @@
 
-import { QuoteItem, Supplier } from "../types/dataTypes";
+import { QuoteItemType, SupplierType } from "../types/dataTypes";
 import { cardColorSchemes, ratingColorSchemes } from "./colors";
 
 
-export const processData = (quoteItems: QuoteItem[], suppliers: Supplier[]) => {
-    const itemsBySupplier: { [key: string]: QuoteItem[] } = quoteItems.reduce((acc: { [key: string]: QuoteItem[] }, item) => {
+export const processData = (quoteItems: QuoteItemType[], suppliers: SupplierType[]) => {
+    const itemsBySupplier: { [key: string]: QuoteItemType[] } = quoteItems.reduce((acc: { [key: string]: QuoteItemType[] }, item) => {
         if (!acc[item.supplier_id]) acc[item.supplier_id] = [];
         
         acc[item.supplier_id].push(item);
         return acc;
     }, {});
   
-    return suppliers.map((supplier: Supplier) => ({
+    return suppliers.map((supplier: SupplierType) => ({
       supplier_id: supplier.supplier_id,
       name: supplier.name,
       score: supplier.score,

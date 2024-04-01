@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { UseQuoteLogicProps } from './types';
 import { closeQuote, createQuote, updateQuote } from '../../../redux/quotes/quotes.action';
-import { Quote, QuoteItem } from '../../../types/dataTypes';
+import { QuoteType, QuoteItemType } from '../../../types/dataTypes';
 
 const useLogic = ({ onClose, currentData, mode }: UseQuoteLogicProps) => {
     const dispatch = useDispatch();
     const { allQuotes, availableQuotes } = useSelector((state: any) => state.quotes);
-    const [selectedQuotes, setSelectedQuotes] = useState<QuoteItem[]>([]);
-    const [selectedSupplier, setSelectedSupplier] = useState<Quote | null>(null);
+    const [selectedQuotes, setSelectedQuotes] = useState<QuoteItemType[]>([]);
+    const [selectedSupplier, setSelectedSupplier] = useState<QuoteType | null>(null);
 
     useEffect(() => {
         if (mode === 'edit' && currentData) {
@@ -20,7 +20,7 @@ const useLogic = ({ onClose, currentData, mode }: UseQuoteLogicProps) => {
 
     const findQuoteData = (quote_id: string, supplier_id: string) => {
         const supplierData = allQuotes.find((quote: any) => quote.supplier_id === supplier_id);
-        const quote = supplierData?.quoteItems.find((item: QuoteItem) => item.quote_item_id === quote_id);
+        const quote = supplierData?.quoteItems.find((item: QuoteItemType) => item.quote_item_id === quote_id);
         return { supplierData, quote };
     };
 
@@ -62,7 +62,7 @@ const useLogic = ({ onClose, currentData, mode }: UseQuoteLogicProps) => {
 
     const checkInputChecked = (quote_item_id: string) => {
         return availableQuotes.some((quote: any) => 
-            quote.quoteItems.some((item: QuoteItem) => item.quote_item_id === quote_item_id));
+            quote.quoteItems.some((item: QuoteItemType) => item.quote_item_id === quote_item_id));
     };
 
     const checkCanSubmit = () => {

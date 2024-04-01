@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import SupplierCard from '../../components/Cards/SupplierCard/SupplierCard';
 import SupplierCardSkeleton from '../../components/Skeletons/SupplierCardSkeleton/SupplierCardSkeleton';
 import useLogic from './logic';
 import PlaceholderCard from '../../components/Cards/PlaceholderCard/PlaceholderCard';
 import { motion } from 'framer-motion';
+import { SupplierWithQuoteItemsType } from '../../redux/types';
 
 const QuotesScreen = () => {
     const { loading, availableQuotes, closeCard } = useLogic();
@@ -34,7 +34,7 @@ const QuotesScreen = () => {
         const placeholdersToAdd = Math.max(0, 3 - numberOfCards);
     
 
-        const supplierCards = availableQuotes.slice(0, 3).map((quote: any, index) => (
+        const supplierCards = availableQuotes.slice(0, 3).map((quote: SupplierWithQuoteItemsType, index: number) => (
             <motion.div
                 key={quote.supplier_id}
                 custom={index}
