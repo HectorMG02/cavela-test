@@ -7,7 +7,7 @@ function App() {
     return (
         <>
             <Provider store={store}>
-            <QuotesScreen />
+                <QuotesScreen />
             </Provider>
         </>
     );
