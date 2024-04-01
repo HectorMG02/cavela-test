@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { QuoteData } from "./types";
+import { SupplierWithQuoteItemsType } from "../../../redux/types";
 
-
-const useLogic = ( { quote } : { quote : QuoteData}) => { 
+const useLogic = ( { quote } : { quote : SupplierWithQuoteItemsType}) => { 
       const [open, setOpen] = useState(false);
 
       const onClose = () => {
