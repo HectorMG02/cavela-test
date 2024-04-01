@@ -7,7 +7,7 @@ import { SupplierWithQuoteItemsType } from '../../../redux/types';
 
 
 
-const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData }) => {
+const QuotesTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData }) => {
   const { allQuotes, toggleQuote, submitQuote, checkQuoteIsDisabled, checkInputChecked, checkCanSubmit } = useLogic({ onClose, mode, currentData });
 
   return (
@@ -121,6 +121,7 @@ const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData }) =
                                                     }
                                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                                                     defaultChecked={checkInputChecked(item.quote_item_id)}
+                                                    data-testid="quote-checkbox"
                                                 />
                                             </td>
                                         </tr>
@@ -144,4 +145,4 @@ const QuoteTable: React.FC<QuoteTableProps> = ({ onClose, mode, currentData }) =
   );
 };
 
-export default QuoteTable;
+export default QuotesTable;
