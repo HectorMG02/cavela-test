@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent, screen } from '@testing-library/react';
-import QuoteModal from './QuoteModal'; // Adjust the import path as necessary
+import QuoteModal from './QuoteModal';
 
 vi.mock('../Tables/QuotesTable/QuotesTable', () => {
   return {
