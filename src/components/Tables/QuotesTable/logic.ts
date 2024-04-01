@@ -30,7 +30,7 @@ const useLogic = ({ onClose, mode, currentData }: UseQuoteLogicProps) => {
 
     const toggleQuote = (quote_id: string, supplier_id: string, checked: boolean) => {
         const { supplierData, quote } = findQuoteData(quote_id, supplier_id);
-        if (!quote || supplierData) return;
+        if (!quote) return;
 
         const newSelectedQuotes = checked
             ? [...selectedQuotes, quote]
@@ -50,11 +50,10 @@ const useLogic = ({ onClose, mode, currentData }: UseQuoteLogicProps) => {
             return;
         }
  
-        const quoteAction = mode === 'create'
-            ? () => dispatch(createQuote({ ...selectedSupplier, quoteItems: selectedQuotes }))
-            : () => dispatch(updateQuote(currentData?.supplier_id ?? '', selectedQuotes));
+ 
+        if (mode === 'create') dispatch(createQuote({ ...selectedSupplier, quoteItems: selectedQuotes }));
+        else if (mode === 'edit' && currentData) dispatch(updateQuote(currentData.supplier_id, selectedQuotes));
 
-        quoteAction();
         onClose();
     };
 
