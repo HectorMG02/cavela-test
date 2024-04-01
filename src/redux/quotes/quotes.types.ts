@@ -1,3 +1,4 @@
+import { QuoteItemType } from "../../types/dataTypes";
 import { SupplierWithQuoteItemsType } from "../types";
 
 export enum ActionType {
@@ -9,7 +10,7 @@ export enum ActionType {
 
 
 export interface QuotesState {
-    quoteItems?: unknown;
+    quoteItems?: QuoteItemType;
     quotes?: SupplierWithQuoteItemsType[];
     newQuoteData?: SupplierWithQuoteItemsType;
     supplier_id: string;
